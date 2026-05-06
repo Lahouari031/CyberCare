@@ -1,0 +1,2951 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberCare – SecuriMed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Martian+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & ROOT ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --white: #ffffff;
+  --off-white: #f7f8fa;
+  --gray-50: #f0f2f5;
+  --gray-100: #e4e8ee;
+  --gray-200: #c9d0db;
+  --gray-300: #9aa3b0;
+  --gray-400: #6b7585;
+  --gray-700: #2d3340;
+  --gray-900: #111520;
+  --black: #080b12;
+
+  --red: #d0222e;
+  --red-light: #fdf2f3;
+  --red-mid: #fce4e6;
+  --red-border: #f5c6ca;
+
+  --orange: #c05c00;
+  --orange-light: #fef6f0;
+  --orange-mid: #fde8d5;
+  --orange-border: #f9d0b0;
+
+  --green: #0a7c4a;
+  --green-light: #f0faf5;
+  --green-mid: #d6f2e6;
+  --green-border: #a8e2c6;
+
+  --blue: #1a4fa0;
+  --blue-light: #f0f5ff;
+  --blue-mid: #dce8ff;
+  --blue-border: #b0c8f8;
+
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'Martian Mono', 'Courier New', monospace;
+  --font-body: 'DM Sans', sans-serif;
+
+  --nav-h: 64px;
+  --radius: 6px;
+  --radius-lg: 12px;
+}
+
+body {
+  background: var(--white);
+  color: var(--gray-900);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; }
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+h3 { font-size: 1.25rem; }
+.mono { font-family: var(--font-mono); }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-100);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 1000;
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: var(--gray-900);
+  cursor: pointer;
+}
+
+.nav-cross {
+  width: 32px; height: 32px;
+  background: var(--red);
+  border-radius: 4px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+
+.nav-cross svg { width: 18px; height: 18px; fill: white; }
+
+.nav-wordmark {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.nav-wordmark span { color: var(--gray-300); font-weight: 300; }
+
+.nav-links {
+  display: flex; gap: 0; list-style: none;
+}
+
+.nav-links li a, .nav-links li button {
+  display: block;
+  padding: 0.4rem 1rem;
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: none; border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  border-radius: var(--radius);
+}
+
+.nav-links li a:hover, .nav-links li button:hover { color: var(--gray-900); }
+.nav-links li a.active, .nav-links li button.active { color: var(--red); }
+
+.nav-alert {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.nav-alert.green { background: var(--green-mid); color: var(--green); border: 1px solid var(--green-border); }
+.nav-alert.orange { background: var(--orange-mid); color: var(--orange); border: 1px solid var(--orange-border); animation: urgentPulse 2s infinite; }
+.nav-alert.red { background: var(--red-mid); color: var(--red); border: 1px solid var(--red-border); animation: urgentPulse 1s infinite; }
+
+@keyframes urgentPulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 4px transparent; }
+}
+
+.alert-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ─── PAGE SYSTEM ─── */
+.page { display: none; padding-top: var(--nav-h); min-height: 100vh; }
+.page.active { display: block; }
+
+/* ─── HOME PAGE ─── */
+.hero {
+  border-bottom: 1px solid var(--gray-100);
+  padding: 5rem 2rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-left {}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  background: var(--red-light);
+  border: 1px solid var(--red-border);
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 { margin-bottom: 1.25rem; color: var(--gray-900); }
+.hero h1 em { font-style: italic; color: var(--red); }
+
+.hero-sub {
+  color: var(--gray-400);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  max-width: 420px;
+  margin-bottom: 2rem;
+}
+
+.hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: all 0.15s;
+}
+
+.btn-red { background: var(--red); color: white; }
+.btn-red:hover { background: #b81c27; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(208,34,46,0.3); }
+.btn-outline { background: white; color: var(--gray-700); border: 1px solid var(--gray-200); }
+.btn-outline:hover { border-color: var(--gray-300); background: var(--gray-50); }
+
+/* dashboard panel */
+.hero-right {}
+
+.dashboard-panel {
+  background: var(--off-white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+.dp-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.dp-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); }
+.dp-time { font-size: 0.72rem; color: var(--gray-300); }
+
+.dp-alert-level {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.dp-alert-level:hover { opacity: 0.85; }
+.dp-alert-level.green { background: var(--green-mid); border: 1px solid var(--green-border); }
+.dp-alert-level.orange { background: var(--orange-mid); border: 1px solid var(--orange-border); }
+.dp-alert-level.red { background: var(--red-mid); border: 1px solid var(--red-border); }
+
+.dp-level-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
+.dp-level-name { font-size: 0.85rem; font-weight: 700; margin-top: 1px; }
+.dp-alert-level.green .dp-level-label, .dp-alert-level.green .dp-level-name { color: var(--green); }
+.dp-alert-level.orange .dp-level-label, .dp-alert-level.orange .dp-level-name { color: var(--orange); }
+.dp-alert-level.red .dp-level-label, .dp-alert-level.red .dp-level-name { color: var(--red); }
+
+.dp-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.dp-stat {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  padding: 0.85rem;
+}
+
+.dp-stat-val { font-size: 1.4rem; font-weight: 700; color: var(--gray-900); line-height: 1; }
+.dp-stat-key { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-300); margin-top: 4px; }
+
+/* ─── CONFORM STRIP ─── */
+.conform-strip {
+  background: var(--off-white);
+  border-bottom: 1px solid var(--gray-100);
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 2.5rem; flex-wrap: wrap;
+}
+
+.conform-item {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray-400);
+}
+
+.conform-check {
+  width: 16px; height: 16px;
+  background: var(--green-mid);
+  border: 1px solid var(--green-border);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.55rem;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* DASHBOARD STATUS SECTION */
+.status-section {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray-300);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-100); }
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.status-card {
+  background: white;
+  padding: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+
+.status-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.status-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius);
+  display: grid; place-items: center;
+}
+
+.status-icon svg { width: 18px; height: 18px; }
+.status-icon.blue { background: var(--blue-mid); color: var(--blue); }
+.status-icon.green { background: var(--green-mid); color: var(--green); }
+.status-icon.red { background: var(--red-mid); color: var(--red); }
+
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 100px;
+}
+
+.status-badge.ok { background: var(--green-mid); color: var(--green); border: 1px solid var(--green-border); }
+.status-badge.warn { background: var(--orange-mid); color: var(--orange); border: 1px solid var(--orange-border); }
+.status-badge.crit { background: var(--red-mid); color: var(--red); border: 1px solid var(--red-border); }
+
+.status-val { font-family: var(--font-display); font-size: 2rem; color: var(--gray-900); line-height: 1; }
+.status-key { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-300); }
+.status-note { font-size: 0.8rem; color: var(--gray-400); }
+
+/* ─── INCIDENT DASHBOARD ─── */
+.incident-dashboard {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.incident-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.incident-panel {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.incident-level-bar {
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.incident-level-bar.green { background: var(--green-light); }
+.incident-level-bar.orange { background: var(--orange-light); }
+.incident-level-bar.red { background: var(--red-light); }
+
+.incident-level-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.incident-level-bar.green .incident-level-title { color: var(--green); }
+.incident-level-bar.orange .incident-level-title { color: var(--orange); }
+.incident-level-bar.red .incident-level-title { color: var(--red); }
+
+.incident-level-desc { font-size: 0.82rem; color: var(--gray-400); }
+
+.level-selector {
+  display: flex; gap: 0.5rem; margin-left: auto;
+}
+
+.level-btn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid;
+  transition: all 0.15s;
+  background: white;
+}
+
+.level-btn.green { color: var(--green); border-color: var(--green-border); }
+.level-btn.green.active, .level-btn.green:hover { background: var(--green-mid); }
+.level-btn.orange { color: var(--orange); border-color: var(--orange-border); }
+.level-btn.orange.active, .level-btn.orange:hover { background: var(--orange-mid); }
+.level-btn.red { color: var(--red); border-color: var(--red-border); }
+.level-btn.red.active, .level-btn.red:hover { background: var(--red-mid); }
+
+.incident-body { padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.incident-actions h4 {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-300);
+  margin-bottom: 0.75rem;
+}
+
+.action-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.action-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius);
+  background: var(--off-white);
+  border: 1px solid var(--gray-100);
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.action-item:hover { border-color: var(--gray-200); background: white; }
+.action-item.done { opacity: 0.5; text-decoration: line-through; }
+
+.action-check {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  margin-top: 1px;
+  transition: all 0.15s;
+}
+
+.action-item.done .action-check {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+  font-size: 0.65rem;
+}
+
+.incident-timer h4 {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-300);
+  margin-bottom: 0.75rem;
+}
+
+.timer-display {
+  background: var(--gray-900);
+  color: white;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.timer-value {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.timer-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-300); margin-top: 6px; }
+
+.timer-controls { display: flex; gap: 0.5rem; }
+
+.timer-btn {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-100);
+  background: white;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  color: var(--gray-700);
+  transition: all 0.15s;
+}
+
+.timer-btn:hover { background: var(--off-white); }
+.timer-btn.primary { background: var(--gray-900); color: white; border-color: var(--gray-900); }
+.timer-btn.primary:hover { background: var(--gray-700); }
+
+.log-list {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  max-height: 160px; overflow-y: auto;
+}
+
+.log-entry {
+  display: flex; gap: 8px;
+  font-size: 0.78rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.log-time { font-family: var(--font-mono); color: var(--gray-300); flex-shrink: 0; font-size: 0.7rem; }
+.log-msg { color: var(--gray-400); }
+
+/* ─── KITS PAGE ─── */
+.page-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.page-header h2 { margin-bottom: 0.5rem; }
+.page-header p { color: var(--gray-400); font-size: 0.9rem; max-width: 500px; }
+
+/* ROLE SELECTOR */
+.role-bar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center; gap: 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  flex-wrap: wrap;
+}
+
+.role-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-300);
+  flex-shrink: 0;
+}
+
+.role-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.role-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  background: white;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.role-btn:hover { border-color: var(--gray-300); color: var(--gray-700); }
+.role-btn.active { background: var(--gray-900); color: white; border-color: var(--gray-900); }
+
+/* KITS GRID */
+.kits-area {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.kit-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kit-card:hover { transform: translateY(-3px); }
+
+.kit-card.green { border-color: var(--green-border); }
+.kit-card.green:hover { box-shadow: 0 8px 32px rgba(10,124,74,0.12); }
+.kit-card.orange { border-color: var(--orange-border); }
+.kit-card.orange:hover { box-shadow: 0 8px 32px rgba(192,92,0,0.12); }
+.kit-card.red { border-color: var(--red-border); }
+.kit-card.red:hover { box-shadow: 0 8px 32px rgba(208,34,46,0.12); }
+
+.kit-card-header {
+  padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.kit-card.green .kit-card-header { background: var(--green-light); }
+.kit-card.orange .kit-card-header { background: var(--orange-light); }
+.kit-card.red .kit-card-header { background: var(--red-light); }
+
+.kit-level {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.kit-card.green .kit-level { color: var(--green); }
+.kit-card.orange .kit-level { color: var(--orange); }
+.kit-card.red .kit-level { color: var(--red); }
+
+.kit-indicator {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.kit-card.green .kit-indicator { background: var(--green); }
+.kit-card.orange .kit-indicator { background: var(--orange); animation: blink 1.5s infinite; }
+.kit-card.red .kit-indicator { background: var(--red); animation: blink 0.8s infinite; }
+
+.kit-card-body { padding: 1.5rem; background: white; }
+.kit-card-body h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+.kit-card-body > p { font-size: 0.85rem; color: var(--gray-400); margin-bottom: 1.25rem; line-height: 1.6; }
+
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+
+.checklist-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius);
+  background: var(--off-white);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.checklist-item:hover { background: var(--gray-50); }
+.checklist-item.checked { opacity: 0.55; text-decoration: line-through; color: var(--gray-400); }
+
+.check-box {
+  width: 16px; height: 16px;
+  border-radius: 3px;
+  border: 1.5px solid var(--gray-200);
+  flex-shrink: 0;
+  display: grid; place-items: center;
+  font-size: 0.6rem;
+  margin-top: 1px;
+  transition: all 0.15s;
+}
+
+.checklist-item.checked .check-box {
+  background: var(--green); border-color: var(--green); color: white;
+}
+
+.kit-card.green .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); }
+.kit-card.orange .checklist-item.checked .check-box { background: var(--orange); border-color: var(--orange); }
+.kit-card.red .checklist-item.checked .check-box { background: var(--red); border-color: var(--red); }
+
+.kit-progress {
+  height: 4px;
+  background: var(--gray-100);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.kit-progress-bar {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 0.3s ease;
+}
+
+.kit-card.green .kit-progress-bar { background: var(--green); }
+.kit-card.orange .kit-progress-bar { background: var(--orange); }
+.kit-card.red .kit-progress-bar { background: var(--red); }
+
+.kit-expand-btn {
+  width: 100%;
+  padding: 0.65rem;
+  border-radius: var(--radius);
+  border: 1px solid;
+  background: white;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.kit-card.green .kit-expand-btn { color: var(--green); border-color: var(--green-border); }
+.kit-card.green .kit-expand-btn:hover { background: var(--green-light); }
+.kit-card.orange .kit-expand-btn { color: var(--orange); border-color: var(--orange-border); }
+.kit-card.orange .kit-expand-btn:hover { background: var(--orange-light); }
+.kit-card.red .kit-expand-btn { color: var(--red); border-color: var(--red-border); }
+.kit-card.red .kit-expand-btn:hover { background: var(--red-light); }
+
+/* ─── FORMATION PAGE ─── */
+.formation-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.tabs {
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--gray-100);
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: none;
+  color: var(--gray-300);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  margin-bottom: -1px;
+}
+
+.tab-btn:hover { color: var(--gray-700); }
+.tab-btn.active { color: var(--gray-900); border-bottom-color: var(--gray-900); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* VIDEOS */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.video-card {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.video-card:hover { border-color: var(--gray-200); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+.video-thumb {
+  aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-thumb-bg { position: absolute; inset: 0; }
+
+.play-btn {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  z-index: 1;
+  transition: transform 0.15s;
+}
+
+.video-card:hover .play-btn { transform: scale(1.08); }
+
+.play-btn svg { width: 16px; height: 16px; fill: var(--gray-900); margin-left: 2px; }
+
+.video-dur {
+  position: absolute; bottom: 8px; right: 8px;
+  background: rgba(0,0,0,0.65);
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.video-body { padding: 1rem 1.1rem 1.25rem; }
+.video-cat { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 0.35rem; }
+.video-title { font-weight: 500; font-size: 0.9rem; line-height: 1.35; margin-bottom: 0.4rem; }
+.video-desc { font-size: 0.8rem; color: var(--gray-400); line-height: 1.55; }
+
+/* ─── SIMULATEUR ─── */
+.sim-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+}
+
+.sim-sidebar {}
+
+.sim-scenario-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.sim-scenario-btn {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-100);
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 0.83rem;
+}
+
+.sim-scenario-btn:hover { border-color: var(--gray-200); }
+.sim-scenario-btn.active { border-color: var(--gray-900); background: var(--gray-900); color: white; }
+
+.sim-scenario-btn .sc-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 3px;
+  opacity: 0.6;
+}
+
+.sim-scenario-btn.active .sc-label { opacity: 0.5; }
+.sim-scenario-btn .sc-name { font-weight: 500; }
+
+.sim-main {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.sim-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.sim-title { font-weight: 500; font-size: 0.95rem; }
+.sim-score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--blue-mid);
+  color: var(--blue);
+  border: 1px solid var(--blue-border);
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+}
+
+.sim-body { padding: 1.5rem; }
+
+.sim-situation {
+  background: var(--off-white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.sim-question {
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.sim-choices { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+
+.sim-choice {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-100);
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  transition: all 0.15s;
+  background: white;
+  text-align: left;
+}
+
+.sim-choice:hover { border-color: var(--gray-200); background: var(--off-white); }
+.sim-choice.correct { border-color: var(--green-border); background: var(--green-light); color: var(--green); }
+.sim-choice.wrong { border-color: var(--red-border); background: var(--red-light); color: var(--red); }
+.sim-choice.missed { border-color: var(--green-border); background: white; color: var(--green); opacity: 0.6; }
+.sim-choice.disabled { cursor: default; }
+
+.choice-letter {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gray-200);
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.sim-choice.correct .choice-letter { background: var(--green); border-color: var(--green); color: white; }
+.sim-choice.wrong .choice-letter { background: var(--red); border-color: var(--red); color: white; }
+
+.sim-feedback {
+  display: none;
+  padding: 1rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.sim-feedback.show { display: block; }
+.sim-feedback.good { background: var(--green-light); border: 1px solid var(--green-border); color: var(--green); }
+.sim-feedback.bad { background: var(--red-light); border: 1px solid var(--red-border); color: var(--red); }
+
+.sim-next-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--gray-900);
+  color: white;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: none;
+}
+
+.sim-next-btn.show { display: inline-block; }
+.sim-next-btn:hover { background: var(--gray-700); }
+
+.sim-result {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+
+.sim-result.show { display: block; }
+.sim-result-score { font-family: var(--font-display); font-size: 3.5rem; color: var(--gray-900); margin-bottom: 0.5rem; }
+.sim-result-label { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-300); margin-bottom: 1rem; }
+.sim-result-msg { font-size: 0.9rem; color: var(--gray-400); margin-bottom: 1.5rem; }
+
+/* ─── PAPIER PAGE ─── */
+.papier-intro {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+}
+
+.alert-banner {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--red-border);
+  background: var(--red-light);
+  font-size: 0.85rem;
+  color: var(--gray-700);
+  line-height: 1.55;
+}
+
+.alert-banner-dot {
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+  animation: blink 1s infinite;
+}
+
+.alert-banner strong { color: var(--red); }
+
+.papier-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.papier-card {
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.papier-card:hover { border-color: var(--gray-200); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+
+.papier-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex; align-items: center; gap: 0.75rem;
+}
+
+.papier-icon {
+  width: 32px; height: 32px;
+  background: var(--blue-mid);
+  border-radius: var(--radius);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+
+.papier-icon svg { width: 16px; height: 16px; color: var(--blue); }
+
+.papier-title-area h4 { font-size: 0.9rem; font-weight: 500; }
+.papier-title-area p { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-300); }
+
+.papier-card-body { padding: 1.25rem; }
+
+.papier-fields {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.papier-field {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0.45rem 0.7rem;
+  background: var(--off-white);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  color: var(--gray-700);
+}
+
+.field-num {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--gray-300);
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.papier-dl-btn {
+  width: 100%;
+  padding: 0.65rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--blue-border);
+  background: var(--blue-light);
+  color: var(--blue);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+
+.papier-dl-btn:hover { background: var(--blue-mid); }
+.papier-dl-btn svg { width: 13px; height: 13px; }
+
+/* ─── FICHE SELECTOR ─── */
+.fiche-sel-btn {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  padding: 0.45rem 1rem; border-radius: var(--radius);
+  border: 1px solid var(--gray-200); background: white;
+  color: var(--gray-400); cursor: pointer; transition: all 0.15s;
+}
+.fiche-sel-btn:hover { border-color: var(--gray-300); color: var(--gray-700); }
+.fiche-sel-btn.active { background: var(--gray-900); color: white; border-color: var(--gray-900); }
+.fiche-preview { display: none; }
+.fiche-preview.active { display: block; }
+.fiche-toolbar {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem;
+}
+.fiche-tag {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.35rem;
+}
+.fiche-tag.red { background: var(--red-mid); color: var(--red); border: 1px solid var(--red-border); }
+.fiche-tag.orange { background: var(--orange-mid); color: var(--orange); border: 1px solid var(--orange-border); }
+.fiche-toolbar-title { font-weight: 500; font-size: 0.95rem; color: var(--gray-700); }
+.fiche-print-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0.6rem 1.1rem; border-radius: var(--radius);
+  border: 1px solid var(--gray-200); background: white;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--gray-700); cursor: pointer; transition: all 0.15s;
+}
+.fiche-print-btn:hover { background: var(--gray-900); color: white; border-color: var(--gray-900); }
+
+/* ─── FORM SHEET ─── */
+.form-sheet {
+  background: white; border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+  padding: 2rem; font-family: var(--font-body);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.form-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding-bottom: 1rem; border-bottom: 2px solid var(--gray-900); margin-bottom: 0;
+}
+.form-header-left { display: flex; align-items: center; gap: 0.85rem; }
+.form-logo-box {
+  width: 38px; height: 38px; background: var(--red); color: white;
+  display: grid; place-items: center; font-size: 1.4rem; font-weight: 700;
+  border-radius: 4px; flex-shrink: 0;
+}
+.form-hopital { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-900); }
+.form-service { font-size: 0.78rem; color: var(--gray-400); margin-top: 2px; }
+.form-line-short { display: inline-block; width: 100px; border-bottom: 1px solid var(--gray-300); }
+.form-header-right { text-align: right; }
+.form-doc-title { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-900); }
+.form-doc-sub { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); margin-top: 2px; }
+.form-doc-ref { font-family: var(--font-mono); font-size: 0.6rem; color: var(--gray-300); margin-top: 3px; }
+.form-alert-bar {
+  padding: 0.5rem 1rem; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; text-align: center; margin: 0 -2rem 1.25rem;
+}
+.form-alert-bar.red { background: var(--red); color: white; }
+.form-alert-bar.orange { background: var(--orange); color: white; }
+.form-section-title {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400);
+  border-bottom: 1px solid var(--gray-100); padding-bottom: 0.3rem; margin: 1.1rem 0 0.75rem;
+}
+.form-field { display: flex; flex-direction: column; gap: 4px; }
+.form-field label { font-size: 0.72rem; color: var(--gray-400); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.form-input-line { border: none; border-bottom: 1px solid var(--gray-200); height: 26px; width: 100%; background: transparent; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 0.75rem; }
+.form-checkboxes { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+.form-cb { display: flex; align-items: center; gap: 4px; font-size: 0.78rem; color: var(--gray-700); cursor: default; }
+.form-box { width: 14px; height: 14px; border: 1.5px solid var(--gray-300); border-radius: 2px; flex-shrink: 0; }
+.form-box.green-box { border-color: var(--green); }
+.form-box.orange-box { border-color: var(--orange); }
+.form-box.red-box { border-color: var(--red); }
+.form-box-line { flex: 1; height: 26px; border: none; border-bottom: 1px solid var(--gray-200); }
+.form-vitaux-grid { border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; margin-bottom: 0.75rem; }
+.form-vitaux-row { display: grid; grid-template-columns: 70px 1fr 1fr 80px 70px 80px 70px; }
+.form-vitaux-header { background: var(--off-white); }
+.form-vitaux-header span { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); padding: 0.4rem 0.5rem; border-right: 1px solid var(--gray-100); }
+.form-vitaux-row .form-box-line { border-radius: 0; border-bottom: 1px solid var(--gray-100); border-right: 1px solid var(--gray-100); padding: 0 4px; }
+.form-soins-table { border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; margin-bottom: 0.75rem; }
+.form-soins-row { display: flex; }
+.form-soins-header { background: var(--off-white); }
+.form-soins-header span { flex: 1; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); padding: 0.4rem 0.5rem; border-right: 1px solid var(--gray-100); }
+.form-soins-row .form-box-line { border-radius: 0; border-bottom: 1px solid var(--gray-100); border-right: 1px solid var(--gray-100); padding: 0 4px; }
+.form-prescriptions-table { border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; margin-bottom: 0.75rem; }
+.form-presc-header { display: flex; background: var(--off-white); }
+.form-presc-header span { flex: 1; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); padding: 0.4rem 0.5rem; border-right: 1px solid var(--gray-100); }
+.form-presc-row { display: flex; border-top: 1px solid var(--gray-100); min-height: 30px; align-items: center; }
+.form-presc-row .form-box-line { border-radius: 0; border-right: 1px solid var(--gray-100); height: 30px; padding: 0 4px; }
+.form-alertes-grid { display: flex; flex-direction: column; border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; margin-bottom: 0.75rem; }
+.form-alerte-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--gray-100); font-size: 0.8rem; }
+.form-alerte-row:last-child { border-bottom: none; }
+.form-cb-col { flex-shrink: 0; }
+.form-alerte-label { flex: 2; font-size: 0.8rem; color: var(--gray-700); }
+.form-alerte-heure { display: flex; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--gray-400); flex-shrink: 0; }
+.form-alerte-nom { display: flex; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--gray-400); flex: 1; }
+.form-chrono-table { border: 1px solid var(--gray-100); border-radius: var(--radius); overflow: hidden; margin-bottom: 0.5rem; }
+.form-chrono-header { display: flex; background: var(--off-white); }
+.form-chrono-header span { flex: 1; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-400); padding: 0.4rem 0.5rem; border-right: 1px solid var(--gray-100); }
+.form-chrono-row { display: flex; border-top: 1px solid var(--gray-100); align-items: center; }
+.form-chrono-row .form-box-line { border-radius: 0; border-right: 1px solid var(--gray-100); height: 28px; }
+.form-footer-row { display: flex; gap: 1rem; align-items: flex-end; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--gray-100); }
+.form-field-small { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.form-field-small label { font-size: 0.68rem; color: var(--gray-400); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.form-sig-box { height: 44px; border: 1.5px solid var(--gray-900); border-radius: 4px; }
+.form-print-note { margin-top: 1rem; font-family: var(--font-mono); font-size: 0.6rem; color: var(--gray-200); text-align: center; border-top: 1px solid var(--gray-100); padding-top: 0.5rem; }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(8,11,18,0.6);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  width: 100%; max-width: 560px;
+  max-height: 88vh;
+  overflow-y: auto;
+  animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn { from { opacity: 0; transform: scale(0.97) translateY(8px); } to { opacity: 1; transform: none; } }
+
+.modal-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border-bottom: 1px solid var(--gray-100);
+  position: sticky; top: 0; background: white; z-index: 1;
+}
+
+.modal-close {
+  width: 28px; height: 28px;
+  background: var(--off-white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+  display: grid; place-items: center;
+  cursor: pointer;
+  color: var(--gray-400);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.modal-close:hover { background: var(--gray-50); color: var(--gray-900); }
+
+.modal-body { padding: 1.5rem; }
+
+.modal-steps { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.modal-step {
+  display: flex; gap: 1rem;
+  padding: 1rem;
+  background: var(--off-white);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius);
+}
+
+.step-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-num.green { background: var(--green-mid); color: var(--green); }
+.step-num.orange { background: var(--orange-mid); color: var(--orange); }
+.step-num.red { background: var(--red-mid); color: var(--red); }
+
+.modal-step h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.25rem; }
+.modal-step p { font-size: 0.82rem; color: var(--gray-400); line-height: 1.55; }
+
+.modal-dl {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1px dashed;
+}
+
+.modal-dl.green { border-color: var(--green-border); background: var(--green-light); }
+.modal-dl.orange { border-color: var(--orange-border); background: var(--orange-light); }
+.modal-dl.red { border-color: var(--red-border); background: var(--red-light); }
+
+.modal-dl strong { display: block; font-size: 0.88rem; }
+.modal-dl p { font-size: 0.78rem; color: var(--gray-400); }
+
+.modal-dl-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid;
+  cursor: pointer;
+  white-space: nowrap;
+  background: white;
+  transition: all 0.15s;
+}
+
+.modal-dl.green .modal-dl-btn { color: var(--green); border-color: var(--green-border); }
+.modal-dl.green .modal-dl-btn:hover { background: var(--green-mid); }
+.modal-dl.orange .modal-dl-btn { color: var(--orange); border-color: var(--orange-border); }
+.modal-dl.orange .modal-dl-btn:hover { background: var(--orange-mid); }
+.modal-dl.red .modal-dl-btn { color: var(--red); border-color: var(--red-border); }
+.modal-dl.red .modal-dl-btn:hover { background: var(--red-mid); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--gray-100);
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1100px; margin: 0 auto;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+
+.footer-brand {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--gray-300);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+  .kits-area { grid-template-columns: 1fr; }
+  .status-grid { grid-template-columns: 1fr; }
+  .incident-body { grid-template-columns: 1fr; }
+  .sim-container { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 3rem 1.25rem 2rem; }
+  .kits-area, .formation-layout, .papier-grid, .papier-intro, .incident-dashboard, .status-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand" onclick="navigate('home')">
+    <div class="nav-cross">
+      <svg viewBox="0 0 20 20"><rect x="8" y="2" width="4" height="16" rx="1"/><rect x="2" y="8" width="16" height="4" rx="1"/></svg>
+    </div>
+    <div class="nav-wordmark">CyberCare <span>/ SecuriMed</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><button onclick="navigate('home')" id="nav-home" class="active">Accueil</button></li>
+    <li><button onclick="navigate('kits')" id="nav-kits">Kits de crise</button></li>
+    <li><button onclick="navigate('formation')" id="nav-formation">Formation</button></li>
+    <li><button onclick="navigate('papier')" id="nav-papier">Support papier</button></li>
+  </ul>
+  <button class="nav-alert green" id="global-alert-btn" onclick="navigate('home'); setTimeout(()=>document.getElementById('incident-section').scrollIntoView({behavior:'smooth'}),100)">
+    <div class="alert-dot"></div>
+    <span id="global-alert-label">Niveau Vert</span>
+  </button>
+</nav>
+
+<!-- ═══════════════════ HOME PAGE ═══════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="alert-dot"></div>
+        Solution de cybersecurite hospitaliere
+      </div>
+      <h1>Protegez votre hopital.<br></h1>
+      <p class="hero-sub">CyberCare fournit au personnel hospitalier les procedures, outils et ressources pour prevenir les cyberattaques, reagir rapidement et garantir la continuite des soins — meme hors ligne.</p>
+      <div class="hero-btns">
+        <button class="btn btn-red" onclick="navigate('kits')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="white"><path d="M10 2L2 7v11h6v-5h4v5h6V7L10 2z"/></svg>
+          Acceder aux kits
+        </button>
+        <button class="btn btn-outline" onclick="navigate('formation')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+          Voir la formation
+        </button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="dashboard-panel">
+        <div class="dp-header">
+          <span class="dp-title">Tableau de bord — Statut</span>
+          <span class="dp-time" id="dp-time">--:--:--</span>
+        </div>
+        <div class="dp-alert-level green" id="dp-main-level" onclick="navigate('home'); setTimeout(()=>document.getElementById('incident-section').scrollIntoView({behavior:'smooth'}),100)">
+          <div>
+            <div class="dp-level-label">Niveau d'alerte actuel</div>
+            <div class="dp-level-name" id="dp-level-name">VERT — Situation normale</div>
+          </div>
+        </div>
+        <div class="dp-stats">
+          <div class="dp-stat">
+            <div class="dp-stat-val" id="dp-tasks-done">0</div>
+            <div class="dp-stat-key">Actions effectuees</div>
+          </div>
+          <div class="dp-stat">
+            <div class="dp-stat-val" id="dp-tasks-total">12</div>
+            <div class="dp-stat-key">Actions disponibles</div>
+          </div>
+          <div class="dp-stat">
+            <div class="dp-stat-val" id="dp-sim-score">—</div>
+            <div class="dp-stat-key">Score simulateur</div>
+          </div>
+          <div class="dp-stat">
+            <div class="dp-stat-val">0</div>
+            <div class="dp-stat-key">Installation requise</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFORM STRIP -->
+  <div class="conform-strip">
+    <div class="conform-item"><div class="conform-check">V</div>Hopitaux publics francais</div>
+    <div class="conform-item"><div class="conform-check">V</div>Disponible hors ligne</div>
+  </div>
+
+  <!-- STATUS CARDS -->
+  <div class="status-section">
+    <div class="section-label">Systemes</div>
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-card-top">
+          <div class="status-icon blue">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>
+          </div>
+          <span class="status-badge ok">Operationnel</span>
+        </div>
+        <div class="status-val">3</div>
+        <div class="status-key">Kits de crise disponibles</div>
+        <div class="status-note">Vert, Orange, Rouge — accessibles hors ligne</div>
+      </div>
+      <div class="status-card">
+        <div class="status-card-top">
+          <div class="status-icon green">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+          </div>
+          <span class="status-badge ok">Pret</span>
+        </div>
+        <div class="status-val">3</div>
+        <div class="status-key">Fiches papier imprimables</div>
+        <div class="status-note">Patient, Operations, Contacts</div>
+      </div>
+      <div class="status-card">
+        <div class="status-card-top">
+          <div class="status-icon blue">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
+          </div>
+          <span class="status-badge ok">Actif</span>
+        </div>
+        <div class="status-val">4</div>
+        <div class="status-key">Modules de formation</div>
+        <div class="status-note">Phishing, ransomware, kit papier, mots de passe</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCIDENT DASHBOARD -->
+  <div class="incident-dashboard" id="incident-section">
+    <div class="section-label">Tableau de bord d'incident</div>
+    <div class="incident-panel">
+      <div class="incident-level-bar green" id="incident-bar">
+        <div class="alert-dot"></div>
+        <div>
+          <div class="incident-level-title" id="incident-bar-title">NIVEAU VERT — Situation normale</div>
+          <div class="incident-level-desc" id="incident-bar-desc">Aucune attaque detectee. Appliquer les bonnes pratiques preventives.</div>
+        </div>
+        <div class="level-selector">
+          <button class="level-btn green active" onclick="setLevel('green')" id="level-btn-green">Vert</button>
+          <button class="level-btn orange" onclick="setLevel('orange')" id="level-btn-orange">Orange</button>
+          <button class="level-btn red" onclick="setLevel('red')" id="level-btn-red">Rouge</button>
+        </div>
+      </div>
+      <div class="incident-body">
+        <div class="incident-actions">
+          <h4>Actions requises</h4>
+          <ul class="action-list" id="action-list"></ul>
+        </div>
+        <div class="incident-timer">
+          <h4>Chronometre de crise</h4>
+          <div class="timer-display">
+            <div class="timer-value" id="timer-val">00:00:00</div>
+            <div class="timer-label">Duree depuis declenchement</div>
+          </div>
+          <div class="timer-controls">
+            <button class="timer-btn primary" id="timer-start-btn" onclick="toggleTimer()">Demarrer</button>
+            <button class="timer-btn" onclick="resetTimer()">Reinitialiser</button>
+          </div>
+          <h4 style="margin-top:1.25rem; margin-bottom:0.75rem;">Journal d'actions</h4>
+          <div class="log-list" id="log-list">
+            <div class="log-entry">
+              <span class="log-time">--:--</span>
+              <span class="log-msg">Systeme pret. En attente d'incident.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <hr style="border:none; border-top: 1px solid var(--gray-100); max-width:1100px; margin:0 auto;">
+  <footer>
+    <div class="footer-brand">CyberCare / SecuriMed</div>
+    <div class="footer-copy">Efrei Paris</div>
+  </footer>
+
+</div><!-- /home -->
+
+<!-- ═══════════════════ KITS PAGE ═══════════════════ -->
+<div class="page" id="page-kits">
+
+  <div class="page-header">Repo
+    <p class="section-label" style="margin-bottom:0.5rem;"></p>
+    <h2>Kits de crise</h2>
+    <p> </p>
+  </div>
+
+  <div class="role-bar">
+    <span class="role-label">Votre role :</span>
+    <div class="role-btns">
+      <button class="role-btn active" onclick="setRole(this,'tous')">Tous</button>
+      <button class="role-btn" onclick="setRole(this,'infirmier')">Infirmier(e)</button>
+      <button class="role-btn" onclick="setRole(this,'medecin')">Medecin</button>
+      <button class="role-btn" onclick="setRole(this,'it')">Informatique / IT</button>
+      <button class="role-btn" onclick="setRole(this,'direction')">Direction</button>
+    </div>
+  </div>
+
+  <div class="kits-area">
+
+    <!-- KIT VERT -->
+    <div class="kit-card green">
+      <div class="kit-card-header">
+        <span class="kit-level">Niveau Vert — Prevention</span>
+        <span class="kit-indicator"></span>
+      </div>
+      <div class="kit-card-body">
+        <h3>Mesures preventives</h3>
+        <p>Aucune attaque detectee. Appliquer les bonnes pratiques quotidiennes pour reduire les risques de cyberattaque.</p>
+        <div class="kit-progress"><div class="kit-progress-bar" id="prog-green" style="width:0%"></div></div>
+        <ul class="checklist" id="checklist-green">
+          <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'green')">
+            <div class="check-box"></div>Verifier que votre session est bien verrouilee quand vous quittez un poste
+          </li>
+          <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'green')">
+            <div class="check-box"></div>Ne pas cliquer sur des liens ou pieces jointes d'expediteurs inconnus
+          </li>
+          <li class="checklist-item" data-roles="it,direction" onclick="toggleCheck(this,'green')">
+            <div class="check-box"></div>Verifier que les sauvegardes automatiques fonctionnent
+          </li>
+          <li class="checklist-item" data-roles="it" onclick="toggleCheck(this,'green')">
+            <div class="check-box"></div>Mettre a jour les logiciels et systemes d'exploitation
+          </li>
+          <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'green')">
+            <div class="check-box"></div>Utiliser un mot de passe robuste et unique pour chaque compte
+          </li>
+          <li class="checklist-item" data-roles="direction,it" onclick="toggleCheck(this,'green')">
+            <div class="check-box"></div>Sensibiliser les equipes aux risques cyber lors du briefing
+          </li>
+        </ul>
+        <button class="kit-expand-btn" onclick="openModal('green')">Voir les procedures completes</button>
+      </div>
+    </div>
+
+    <!-- KIT ORANGE -->
+    <div class="kit-card orange">
+      <div class="kit-card-header">
+        <span class="kit-level">Niveau Orange — Incident detecte</span>
+        <span class="kit-indicator"></span>
+      </div>
+      <div class="kit-card-body">
+        <h3>Reaction rapide</h3>
+        <p>Incident detecte ou comportement suspect. Agir immediatement pour limiter l'impact et alerter les responsables.</p>
+        <div class="kit-progress"><div class="kit-progress-bar" id="prog-orange" style="width:0%"></div></div>
+        <ul class="checklist" id="checklist-orange">
+          <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'orange')">
+            <div class="check-box"></div>STOP — Ne rien faire d'autre. Notez l'heure exacte de detection
+          </li>
+          <li class="checklist-item" data-roles="tous,infirmier,medecin" onclick="toggleCheck(this,'orange')">
+            <div class="check-box"></div>Appeler le responsable informatique (DSI) par telephone
+          </li>
+          <li class="checklist-item" data-roles="it,direction" onclick="toggleCheck(this,'orange')">
+            <div class="check-box"></div>Debrancher le cable reseau du poste suspect (ne pas l'eteindre)
+          </li>
+          <li class="checklist-item" data-roles="direction,it" onclick="toggleCheck(this,'orange')">
+            <div class="check-box"></div>Activer la cellule de crise et prevenir la direction
+          </li>
+          <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'orange')">
+            <div class="check-box"></div>Documenter toutes les actions sur papier (systeme potentiellement compromis)
+          </li>
+          <li class="checklist-item" data-roles="medecin,infirmier" onclick="toggleCheck(this,'orange')">
+            <div class="check-box"></div>Preparer les fiches papier patients au cas ou le systeme serait indisponible
+          </li>
+        </ul>
+        <button class="kit-expand-btn" onclick="openModal('orange')">Voir les procedures completes</button>
+      </div>
+    </div>
+
+    <!-- KIT ROUGE -->
+    <div class="kit-card red">
+      <div class="kit-card-header">
+        <span class="kit-level">Niveau Rouge — Crise totale</span>
+        <span class="kit-indicator"></span>
+      </div>
+      <div class="kit-card-body">
+        <h3>Continuite des soins</h3>
+        <p>Systemes informatiques indisponibles. Basculer immediatement sur les supports papier et maintenir les soins.</p>
+        <div class="kit-progress"><div class="kit-progress-bar" id="prog-red" style="width:0%"></div></div>
+        <ul class="checklist" id="checklist-red">
+          <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'red')">
+            <div class="check-box"></div>Recuperer les fiches papier pre-imprimees dans l'armoire du service
+          </li>
+          <li class="checklist-item" data-roles="medecin,infirmier" onclick="toggleCheck(this,'red')">
+            <div class="check-box"></div>Prioriser les patients en urgence vitale — la continuite des soins prime
+          </li>
+          <li class="checklist-item" data-roles="it,direction" onclick="toggleCheck(this,'red')">
+            <div class="check-box"></div>Couper tous les acces reseau sur instruction du DSI
+          </li>
+          <li class="checklist-item" data-roles="direction,it" onclick="toggleCheck(this,'red')">
+            <div class="check-box"></div>Appeler l'ANSSI au 3218 et signaler l'incident
+          </li>
+          <li class="checklist-item" data-roles="direction" onclick="toggleCheck(this,'red')">
+            <div class="check-box"></div>Signaler a la CNIL si des donnees patients sont compromises
+          </li>
+          <li class="checklist-item" data-roles="it" onclick="toggleCheck(this,'red')">
+            <div class="check-box"></div>Conserver tous les logs sur support externe isole
+          </li>
+        </ul>
+        <button class="kit-expand-btn" onclick="openModal('red')">Voir les procedures completes</button>
+      </div>
+    </div>
+
+  </div>
+
+  <hr style="border:none; border-top:1px solid var(--gray-100); max-width:1100px; margin:0 auto;">
+  <footer>
+    <div class="footer-brand">CyberCare / SecuriMed</div>
+    <div class="footer-copy">Efrei Paris — Projets Transverses 2025/2026</div>
+  </footer>
+</div><!-- /kits -->
+
+<!-- ═══════════════════ FORMATION PAGE ═══════════════════ -->
+<div class="page" id="page-formation">
+
+  <div class="page-header">
+    <p class="section-label" style="margin-bottom:0.5rem;">Sensibilisation</p>
+    <h2>Formation du personnel</h2>
+    <p>Modules courts et accessibles a tous. Testez vos connaissances avec le simulateur d'attaque interactif.</p>
+  </div>
+
+  <div class="formation-layout">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="setTab(this,'videos')">Videos de formation</button>
+      <button class="tab-btn" onclick="setTab(this,'simulateur')">Simulateur d'attaque</button>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="tab-content active" id="tab-videos">
+      <div class="videos-grid">
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <div class="video-thumb-bg" style="background: linear-gradient(135deg, #1e3a5f 0%, #0d1f3c 100%);"></div>
+            <div class="play-btn"><svg viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg></div>
+            <span class="video-dur">4:30</span>
+          </div>
+          <div class="video-body">
+            <div class="video-cat">Niveau 1 — Bases</div>
+            <div class="video-title">Reconnaitre un email de phishing</div>
+            <p class="video-desc">Identifier les signaux d'alerte dans un email suspect et adopter les bons reflexes immediatement.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <div class="video-thumb-bg" style="background: linear-gradient(135deg, #3b1a08 0%, #1a0c03 100%);"></div>
+            <div class="play-btn"><svg viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg></div>
+            <span class="video-dur">3:50</span>
+          </div>
+          <div class="video-body">
+            <div class="video-cat">Niveau 2 — Reaction</div>
+            <div class="video-title">Que faire en cas de ransomware ?</div>
+            <p class="video-desc">Les 5 premieres actions a realiser dans les 10 minutes suivant la detection d'un ransomware.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <div class="video-thumb-bg" style="background: linear-gradient(135deg, #0e2a1e 0%, #071510 100%);"></div>
+            <div class="play-btn"><svg viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg></div>
+            <span class="video-dur">5:00</span>
+          </div>
+          <div class="video-body">
+            <div class="video-cat">Niveau 3 — Continuite</div>
+            <div class="video-title">Utiliser le kit papier de secours</div>
+            <p class="video-desc">Comment remplir et utiliser les fiches papier patient en situation de crise totale sans aucun outil numerique.</p>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <div class="video-thumb-bg" style="background: linear-gradient(135deg, #1e1040 0%, #0d0820 100%);"></div>
+            <div class="play-btn"><svg viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg></div>
+            <span class="video-dur">4:10</span>
+          </div>
+          <div class="video-body">
+            <div class="video-cat">Niveau 1 — Hygiene numerique</div>
+            <div class="video-title">Mots de passe et acces securises</div>
+            <p class="video-desc">Creer et gerer des mots de passe robustes sans gestionnaire complexe, pour tous les membres du personnel.</p>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-videos -->
+
+    <!-- SIMULATEUR -->
+    <div class="tab-content" id="tab-simulateur">
+      <div class="sim-container">
+        <div class="sim-sidebar">
+          <div class="section-label" style="margin-bottom:0.75rem;">Scenarios</div>
+          <div class="sim-scenario-list">
+            <button class="sim-scenario-btn active" onclick="loadScenario(0,this)">
+              <span class="sc-label">Scenario 1</span>
+              <span class="sc-name">Ransomware hospitalier</span>
+            </button>
+            <button class="sim-scenario-btn" onclick="loadScenario(1,this)">
+              <span class="sc-label">Scenario 2</span>
+              <span class="sc-name">Phishing cible personnel</span>
+            </button>
+            <button class="sim-scenario-btn" onclick="loadScenario(2,this)">
+              <span class="sc-label">Scenario 3</span>
+              <span class="sc-name">Acces non autorise DPI</span>
+            </button>
+          </div>
+        </div>
+        <div class="sim-main">
+          <div class="sim-header">
+            <span class="sim-title" id="sim-title">Scenario en cours</span>
+            <span class="sim-score-badge" id="sim-score-badge">Score : 0 / 0</span>
+          </div>
+          <div class="sim-body">
+            <div class="sim-situation" id="sim-situation"></div>
+            <div id="sim-question-area">
+              <p class="sim-question" id="sim-question"></p>
+              <div class="sim-choices" id="sim-choices"></div>
+              <div class="sim-feedback" id="sim-feedback"></div>
+              <button class="sim-next-btn" id="sim-next-btn" onclick="nextQuestion()">Question suivante</button>
+            </div>
+            <div class="sim-result" id="sim-result">
+              <div class="sim-result-score" id="sim-result-score">0/0</div>
+              <div class="sim-result-label">Score final</div>
+              <p class="sim-result-msg" id="sim-result-msg"></p>
+              <button class="btn btn-outline" onclick="restartScenario()" style="margin:0 auto;">Recommencer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-sim -->
+
+  </div>
+
+  <hr style="border:none; border-top:1px solid var(--gray-100); max-width:1100px; margin:0 auto;">
+  <footer>
+    <div class="footer-brand">CyberCare / SecuriMed</div>
+    <div class="footer-copy">Efrei Paris — Projets Transverses 2025/2026</div>
+  </footer>
+</div><!-- /formation -->
+
+<!-- ═══════════════════ PAPIER PAGE ═══════════════════ -->
+<div class="page" id="page-papier">
+
+  <div class="page-header">
+    <p class="section-label" style="margin-bottom:0.5rem;"></p>
+    <h2>Support papier de secours</h2>
+    <p>Vraies fiches a remplir a la main. Imprimez-les en avance et rangez-les dans chaque service. Elles fonctionnent sans electricite ni reseau.</p>
+  </div>
+
+  <div class="papier-intro">
+    <div class="alert-banner">
+      <div class="alert-banner-dot"></div>
+      <div><strong>En cas de niveau ROUGE :</strong> Ces fiches sont vos seuls outils. Imprimez plusieurs exemplaires de chaque, conservez-les dans l'armoire de chaque service. Remplissage au stylo noir uniquement. Principe de minimisation des donnees : 10 champs maximum par fiche.</div>
+    </div>
+  </div>
+
+  <!-- FICHE SELECTOR -->
+  <div style="max-width:1100px; margin:1.5rem auto 0; padding:0 2rem;">
+    <div class="section-label">Choisir une fiche</div>
+    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:2rem;">
+      <button class="fiche-sel-btn active" onclick="showFiche('patient',this)">Fiche Patient</button>
+      <button class="fiche-sel-btn" onclick="showFiche('soins',this)">Fiche Soins Infirmiers</button>
+      <button class="fiche-sel-btn" onclick="showFiche('medecin',this)">Fiche Prescription Medicale</button>
+      <button class="fiche-sel-btn" onclick="showFiche('incident',this)">Registre Incident Cyber</button>
+    </div>
+  </div>
+
+  <!-- FICHE PREVIEWS -->
+  <div style="max-width:1100px; margin:0 auto; padding:0 2rem 4rem;">
+
+    <!-- ── FICHE PATIENT ── -->
+    <div class="fiche-preview active" id="fiche-patient">
+      <div class="fiche-toolbar">
+        <div>
+          <div class="fiche-tag red">Niveau ROUGE — Mode degrade</div>
+          <div class="fiche-toolbar-title">Fiche Patient — Identification &amp; Informations essentielles</div>
+        </div>
+        <button class="fiche-print-btn" onclick="printFicheHTML('fiche-patient-print')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+          Imprimer cette fiche
+        </button>
+      </div>
+
+      <!-- PRINTABLE FORM -->
+      <div class="form-sheet" id="fiche-patient-print">
+        <div class="form-header">
+          <div class="form-header-left">
+            <div class="form-logo-box">+</div>
+            <div>
+              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-service">Service : <span class="form-line-short"></span></div>
+            </div>
+          </div>
+          <div class="form-header-right">
+            <div class="form-doc-title">FICHE PATIENT</div>
+            <div class="form-doc-sub">MODE DEGRADE — CYBERINCIDENT</div>
+            <div class="form-doc-ref">REF : FP-01 / CyberCare</div>
+          </div>
+        </div>
+        <div class="form-alert-bar red">
+          SYSTEME INFORMATIQUE INDISPONIBLE — REMPLIR AU STYLO NOIR — CONSERVER AVEC LE PATIENT
+        </div>
+
+        <div class="form-section-title">IDENTIFICATION DU PATIENT</div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Nom de famille</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Prenom(s)</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-field"><label>Date de naissance</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Sexe</label>
+            <div class="form-checkboxes">
+              <label class="form-cb"><div class="form-box"></div> M</label>
+              <label class="form-cb"><div class="form-box"></div> F</label>
+              <label class="form-cb"><div class="form-box"></div> Autre</label>
+            </div>
+          </div>
+          <div class="form-field"><label>No IPP (si connu)</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Chambre / Lit</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Service d'appartenance</label><div class="form-input-line"></div></div>
+        </div>
+
+        <div class="form-section-title">INFORMATIONS MEDICALES ESSENTIELLES</div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Groupe sanguin</label>
+            <div class="form-checkboxes" style="flex-wrap:wrap;">
+              <label class="form-cb"><div class="form-box"></div> A+</label>
+              <label class="form-cb"><div class="form-box"></div> A-</label>
+              <label class="form-cb"><div class="form-box"></div> B+</label>
+              <label class="form-cb"><div class="form-box"></div> B-</label>
+              <label class="form-cb"><div class="form-box"></div> O+</label>
+              <label class="form-cb"><div class="form-box"></div> O-</label>
+              <label class="form-cb"><div class="form-box"></div> AB+</label>
+              <label class="form-cb"><div class="form-box"></div> AB-</label>
+              <label class="form-cb"><div class="form-box"></div> Inconnu</label>
+            </div>
+          </div>
+          <div class="form-field"><label>Etat de conscience</label>
+            <div class="form-checkboxes">
+              <label class="form-cb"><div class="form-box"></div> Conscient</label>
+              <label class="form-cb"><div class="form-box"></div> Confus</label>
+              <label class="form-cb"><div class="form-box"></div> Inconscient</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-field"><label>Allergies connues (medicaments, aliments, latex...)</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Traitement(s) en cours</label><div class="form-input-line"></div><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Motif d'hospitalisation</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+
+        <div class="form-section-title">RESPONSABLES &amp; CONTACTS</div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Medecin referent</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Infirmier(e) referent(e)</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-field"><label>Contact d'urgence (nom &amp; telephone)</label><div class="form-input-line"></div></div>
+
+        <div class="form-footer-row">
+          <div class="form-field-small"><label>Fiche redigee par</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Date</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Heure</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Signature</label><div class="form-sig-box"></div></div>
+        </div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche FP-01 — Mode degrade cyberincident — Minimisation des donnees RGPD</div>
+      </div>
+    </div>
+
+    <!-- ── FICHE SOINS INFIRMIERS ── -->
+    <div class="fiche-preview" id="fiche-soins">
+      <div class="fiche-toolbar">
+        <div>
+          <div class="fiche-tag red">Niveau ROUGE — Mode degrade</div>
+          <div class="fiche-toolbar-title">Fiche Soins Infirmiers — Suivi &amp; Transmissions</div>
+        </div>
+        <button class="fiche-print-btn" onclick="printFicheHTML('fiche-soins-print')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+          Imprimer cette fiche
+        </button>
+      </div>
+
+      <div class="form-sheet" id="fiche-soins-print">
+        <div class="form-header">
+          <div class="form-header-left">
+            <div class="form-logo-box">+</div>
+            <div>
+              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-service">Service : <span class="form-line-short"></span></div>
+            </div>
+          </div>
+          <div class="form-header-right">
+            <div class="form-doc-title">SOINS INFIRMIERS</div>
+            <div class="form-doc-sub">MODE DEGRADE — CYBERINCIDENT</div>
+            <div class="form-doc-ref">REF : FSI-02 / CyberCare</div>
+          </div>
+        </div>
+        <div class="form-alert-bar red">
+          SYSTEME INFORMATIQUE INDISPONIBLE — REMPLIR AU STYLO NOIR — UNE FICHE PAR PATIENT PAR EQUIPE
+        </div>
+
+        <div class="form-section-title">IDENTIFICATION</div>
+        <div class="form-row-3">
+          <div class="form-field"><label>Nom / Prenom du patient</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Chambre / Lit</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Date</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Infirmier(e) responsable</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Equipe (Matin / Apres-midi / Nuit)</label>
+            <div class="form-checkboxes">
+              <label class="form-cb"><div class="form-box"></div> Matin</label>
+              <label class="form-cb"><div class="form-box"></div> Apres-midi</label>
+              <label class="form-cb"><div class="form-box"></div> Nuit</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section-title">SIGNES VITAUX</div>
+        <div class="form-vitaux-grid">
+          <div class="form-vitaux-row form-vitaux-header">
+            <span>Heure</span><span>Pression arterielle</span><span>Frequence cardiaque</span><span>Temperature</span><span>SpO2</span><span>Frequence resp.</span><span>Paraphe</span>
+          </div>
+          <div class="form-vitaux-row"><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-vitaux-row"><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-vitaux-row"><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-vitaux-row"><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+        </div>
+
+        <div class="form-section-title">SOINS REALISES</div>
+        <div class="form-soins-table">
+          <div class="form-soins-row form-soins-header">
+            <span>Heure</span><span>Nature du soin</span><span>Medicament / Dose</span><span>Voie</span><span>Paraphe IDE</span>
+          </div>
+          <div class="form-soins-row"><div class="form-box-line"></div><div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:2"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-soins-row"><div class="form-box-line"></div><div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:2"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-soins-row"><div class="form-box-line"></div><div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:2"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-soins-row"><div class="form-box-line"></div><div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:2"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+          <div class="form-soins-row"><div class="form-box-line"></div><div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:2"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
+        </div>
+
+        <div class="form-section-title">TRANSMISSIONS CIBLĖES</div>
+        <div class="form-field"><label>Donnees (observations, etat du patient)</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Actions effectuees</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Resultats et suite prevue</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+
+        <div class="form-footer-row">
+          <div class="form-field-small"><label>Fiche redigee par</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Heure fin equipe</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Signature</label><div class="form-sig-box"></div></div>
+          <div class="form-field-small"><label>Transmission a</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche FSI-02 — Mode degrade cyberincident — Minimisation des donnees RGPD</div>
+      </div>
+    </div>
+
+    <!-- ── FICHE MEDECIN ── -->
+    <div class="fiche-preview" id="fiche-medecin">
+      <div class="fiche-toolbar">
+        <div>
+          <div class="fiche-tag red">Niveau ROUGE — Mode degrade</div>
+          <div class="fiche-toolbar-title">Fiche Prescription Medicale — Ordonnance de secours</div>
+        </div>
+        <button class="fiche-print-btn" onclick="printFicheHTML('fiche-medecin-print')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+          Imprimer cette fiche
+        </button>
+      </div>
+
+      <div class="form-sheet" id="fiche-medecin-print">
+        <div class="form-header">
+          <div class="form-header-left">
+            <div class="form-logo-box">+</div>
+            <div>
+              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-service">Service : <span class="form-line-short"></span></div>
+            </div>
+          </div>
+          <div class="form-header-right">
+            <div class="form-doc-title">PRESCRIPTION MEDICALE</div>
+            <div class="form-doc-sub">MODE DEGRADE — CYBERINCIDENT</div>
+            <div class="form-doc-ref">REF : FPM-03 / CyberCare</div>
+          </div>
+        </div>
+        <div class="form-alert-bar red">
+          ORDONNANCE DE SECOURS — SYSTEME INDISPONIBLE — VALEUR LEGALE AVEC SIGNATURE MANUSCRITE DU MEDECIN
+        </div>
+
+        <div class="form-section-title">IDENTIFICATION PATIENT &amp; MEDECIN</div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Nom / Prenom du patient</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Date de naissance</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-field"><label>Chambre / Lit</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Poids (kg)</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Allergies connues</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Medecin prescripteur (Nom &amp; Prenom)</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>No RPPS</label><div class="form-input-line"></div></div>
+        </div>
+
+        <div class="form-section-title">PRESCRIPTIONS</div>
+        <div class="form-prescriptions-table">
+          <div class="form-presc-header">
+            <span style="flex:3">Medicament (DCI) / Dose</span>
+            <span style="flex:1.5">Voie d'administration</span>
+            <span style="flex:1">Frequence</span>
+            <span style="flex:1.5">Duree / Fin le</span>
+            <span style="flex:1">Urgence</span>
+          </div>
+          <div class="form-presc-row">
+            <div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:1.5"></div><div class="form-box-line" style="flex:1"></div><div class="form-box-line" style="flex:1.5"></div>
+            <div style="flex:1; display:flex; gap:4px; align-items:center; padding:0 4px;"><div class="form-box"></div><span style="font-size:0.7rem;">Urgence</span></div>
+          </div>
+          <div class="form-presc-row">
+            <div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:1.5"></div><div class="form-box-line" style="flex:1"></div><div class="form-box-line" style="flex:1.5"></div>
+            <div style="flex:1; display:flex; gap:4px; align-items:center; padding:0 4px;"><div class="form-box"></div><span style="font-size:0.7rem;">Urgence</span></div>
+          </div>
+          <div class="form-presc-row">
+            <div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:1.5"></div><div class="form-box-line" style="flex:1"></div><div class="form-box-line" style="flex:1.5"></div>
+            <div style="flex:1; display:flex; gap:4px; align-items:center; padding:0 4px;"><div class="form-box"></div><span style="font-size:0.7rem;">Urgence</span></div>
+          </div>
+          <div class="form-presc-row">
+            <div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:1.5"></div><div class="form-box-line" style="flex:1"></div><div class="form-box-line" style="flex:1.5"></div>
+            <div style="flex:1; display:flex; gap:4px; align-items:center; padding:0 4px;"><div class="form-box"></div><span style="font-size:0.7rem;">Urgence</span></div>
+          </div>
+          <div class="form-presc-row">
+            <div class="form-box-line" style="flex:3"></div><div class="form-box-line" style="flex:1.5"></div><div class="form-box-line" style="flex:1"></div><div class="form-box-line" style="flex:1.5"></div>
+            <div style="flex:1; display:flex; gap:4px; align-items:center; padding:0 4px;"><div class="form-box"></div><span style="font-size:0.7rem;">Urgence</span></div>
+          </div>
+        </div>
+
+        <div class="form-section-title">EXAMENS COMPLEMENTAIRES DEMANDES</div>
+        <div class="form-field"><label>Biologie / Imagerie / Autre</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+
+        <div class="form-section-title">NOTES CLINIQUES</div>
+        <div class="form-field"><label>Diagnostic / Evolution</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Consignes particulieres pour l'equipe soignante</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+
+        <div class="form-footer-row" style="margin-top:1rem;">
+          <div class="form-field-small"><label>Date &amp; Heure</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Prochain passage prevu</label><div class="form-input-line"></div></div>
+          <div style="flex:1">
+            <label style="font-size:0.68rem; font-family:monospace; text-transform:uppercase; letter-spacing:0.06em; color:#6b7585; display:block; margin-bottom:6px;">Signature manuscrite du medecin (OBLIGATOIRE)</label>
+            <div style="border:1.5px solid #111520; border-radius:4px; height:52px; background:white;"></div>
+          </div>
+        </div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche FPM-03 — Mode degrade cyberincident — Valeur juridique avec signature manuscrite</div>
+      </div>
+    </div>
+
+    <!-- ── REGISTRE INCIDENT ── -->
+    <div class="fiche-preview" id="fiche-incident">
+      <div class="fiche-toolbar">
+        <div>
+          <div class="fiche-tag orange">Niveau ORANGE/ROUGE</div>
+          <div class="fiche-toolbar-title">Registre Incident Cyber — Chronologie &amp; Actions</div>
+        </div>
+        <button class="fiche-print-btn" onclick="printFicheHTML('fiche-incident-print')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+          Imprimer cette fiche
+        </button>
+      </div>
+
+      <div class="form-sheet" id="fiche-incident-print">
+        <div class="form-header">
+          <div class="form-header-left">
+            <div class="form-logo-box">+</div>
+            <div>
+              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-service">Etablissement : <span class="form-line-short"></span></div>
+            </div>
+          </div>
+          <div class="form-header-right">
+            <div class="form-doc-title">REGISTRE INCIDENT CYBER</div>
+            <div class="form-doc-sub">DOCUMENT CONFIDENTIEL — USAGE INTERNE</div>
+            <div class="form-doc-ref">REF : RIC-04 / CyberCare</div>
+          </div>
+        </div>
+        <div class="form-alert-bar orange">
+          CONSERVER PRECIEUSEMENT — CE DOCUMENT SERA REQUIS PAR L'ANSSI ET LA CNIL — NE PAS DETRUIRE
+        </div>
+
+        <div class="form-section-title">DECLARATION D'INCIDENT</div>
+        <div class="form-row-3">
+          <div class="form-field"><label>Date de detection</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Heure de detection</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Niveau d'alerte declare</label>
+            <div class="form-checkboxes">
+              <label class="form-cb"><div class="form-box green-box"></div> Vert</label>
+              <label class="form-cb"><div class="form-box orange-box"></div> Orange</label>
+              <label class="form-cb"><div class="form-box red-box"></div> Rouge</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field"><label>Declarant — Nom &amp; Prenom</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Fonction / Service</label><div class="form-input-line"></div></div>
+        </div>
+        <div class="form-field"><label>Description de l'incident (ce qui a ete observe)</label><div class="form-input-line"></div><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Systemes / Postes affectes</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+
+        <div class="form-section-title">ALERTES EMISES</div>
+        <div class="form-alertes-grid">
+          <div class="form-alerte-row">
+            <div class="form-cb-col"><div class="form-box"></div></div>
+            <div class="form-alerte-label">DSI / Responsable informatique</div>
+            <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
+            <div class="form-alerte-nom">Nom : <div class="form-box-line" style="flex:1;"></div></div>
+          </div>
+          <div class="form-alerte-row">
+            <div class="form-cb-col"><div class="form-box"></div></div>
+            <div class="form-alerte-label">Direction de l'etablissement</div>
+            <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
+            <div class="form-alerte-nom">Nom : <div class="form-box-line" style="flex:1;"></div></div>
+          </div>
+          <div class="form-alerte-row">
+            <div class="form-cb-col"><div class="form-box"></div></div>
+            <div class="form-alerte-label">ANSSI (3218)</div>
+            <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
+            <div class="form-alerte-nom">No dossier : <div class="form-box-line" style="flex:1;"></div></div>
+          </div>
+          <div class="form-alerte-row">
+            <div class="form-cb-col"><div class="form-box"></div></div>
+            <div class="form-alerte-label">CERT Sante</div>
+            <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
+            <div class="form-alerte-nom">No dossier : <div class="form-box-line" style="flex:1;"></div></div>
+          </div>
+          <div class="form-alerte-row">
+            <div class="form-cb-col"><div class="form-box"></div></div>
+            <div class="form-alerte-label">CNIL (violation donnees patients)</div>
+            <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
+            <div class="form-alerte-nom">Delai 72h — Echeance : <div class="form-box-line" style="flex:1;"></div></div>
+          </div>
+        </div>
+
+        <div class="form-section-title">CHRONOLOGIE DES ACTIONS</div>
+        <div class="form-chrono-table">
+          <div class="form-chrono-header"><span>Heure</span><span style="flex:3">Action effectuee</span><span>Responsable</span></div>
+          <div class="form-chrono-row"><div class="form-box-line" style="width:70px;"></div><div class="form-box-line" style="flex:3;"></div><div class="form-box-line"></div></div>
+          <div class="form-chrono-row"><div class="form-box-line" style="width:70px;"></div><div class="form-box-line" style="flex:3;"></div><div class="form-box-line"></div></div>
+          <div class="form-chrono-row"><div class="form-box-line" style="width:70px;"></div><div class="form-box-line" style="flex:3;"></div><div class="form-box-line"></div></div>
+          <div class="form-chrono-row"><div class="form-box-line" style="width:70px;"></div><div class="form-box-line" style="flex:3;"></div><div class="form-box-line"></div></div>
+          <div class="form-chrono-row"><div class="form-box-line" style="width:70px;"></div><div class="form-box-line" style="flex:3;"></div><div class="form-box-line"></div></div>
+        </div>
+
+        <div class="form-field" style="margin-top:0.75rem;"><label>Mesures de continuite des soins activees</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+
+        <div class="form-footer-row">
+          <div class="form-field-small"><label>Cloture de l'incident le</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>A</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Responsable incident</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Signature</label><div class="form-sig-box"></div></div>
+        </div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche RIC-04 — Document confidentiel — Conserver 5 ans — Obligations RGPD Art.33</div>
+      </div>
+    </div>
+
+  </div><!-- /papier content -->
+
+  <hr style="border:none; border-top:1px solid var(--gray-100); max-width:1100px; margin:0 auto;">
+  <footer>
+    <div class="footer-brand">CyberCare / SecuriMed</div>
+    <div class="footer-copy">Efrei Paris — Projets Transverses 2025/2026</div>
+  </footer>
+</div><!-- /papier -->
+
+<!-- ═══════════════════ MODALS ═══════════════════ -->
+
+<div class="modal-overlay" id="modal-overlay-green" onclick="if(event.target===this)closeModal('green')">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="section-label" style="margin-bottom:0.25rem;">Niveau Vert</div>
+        <h3 style="font-size:1.3rem;">Kit Prevention — Procedures completes</h3>
+      </div>
+      <button class="modal-close" onclick="closeModal('green')">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-steps">
+        <div class="modal-step">
+          <div class="step-num green">1</div>
+          <div>
+            <h4>Verifier les mots de passe et acces</h4>
+            <p>S'assurer que tous les comptes utilisent des mots de passe complexes d'au moins 12 caracteres (majuscules, chiffres, caracteres speciaux). Activer l'authentification a double facteur si disponible. Changer les mots de passe partages immediatement.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num green">2</div>
+          <div>
+            <h4>Sensibiliser aux emails suspects</h4>
+            <p>Rappeler aux equipes de ne jamais cliquer sur un lien ou ouvrir une piece jointe d'un expediteur inconnu. Verifier l'adresse email complete de l'expediteur. Signaler tout email douteux au DSI avant toute action.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num green">3</div>
+          <div>
+            <h4>Verifier les mises a jour systeme</h4>
+            <p>S'assurer que les systemes d'exploitation et logiciels medicaux sont a jour. Contacter le DSI si des mises a jour critiques sont en attente depuis plus de 7 jours. Les patches de securite sont prioritaires.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num green">4</div>
+          <div>
+            <h4>Verifier les sauvegardes critiques</h4>
+            <p>Confirmer que les sauvegardes automatiques fonctionnent et que les dernieres sauvegardes sont recentes (moins de 24h). Tester la restauration si possible. Garder une copie hors ligne sur support physique isole.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-dl green">
+        <div>
+          <strong>Fiche Prevention — Kit Vert</strong>
+          <p>Procedures completes a imprimer et afficher dans chaque service</p>
+        </div>
+        <button class="modal-dl-btn" onclick="alert('PDF bientot disponible')">Telecharger</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay-orange" onclick="if(event.target===this)closeModal('orange')">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="section-label" style="margin-bottom:0.25rem; color:var(--orange);">Niveau Orange</div>
+        <h3 style="font-size:1.3rem;">Kit Reaction Rapide — Procedures completes</h3>
+      </div>
+      <button class="modal-close" onclick="closeModal('orange')">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-steps">
+        <div class="modal-step">
+          <div class="step-num orange">1</div>
+          <div>
+            <h4>STOP — Preserver les preuves</h4>
+            <p>Ne pas eteindre les machines, ne pas supprimer de fichiers, ne pas tenter de reparer seul. Garder les preuves intactes. Noter l'heure exacte de detection et ce que vous avez observe (message, comportement anormal, etc.).</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num orange">2</div>
+          <div>
+            <h4>Alerter le DSI par telephone</h4>
+            <p>Appeler immediatement le responsable informatique. Ne pas envoyer d'email (le reseau peut etre compromis). Decrire precisement : quel poste, quel symptome, a quelle heure. Rester disponible pour ses instructions.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num orange">3</div>
+          <div>
+            <h4>Isoler le poste suspect</h4>
+            <p>Sur instruction du DSI uniquement : debrancher le cable reseau du poste concerne. Ne pas l'eteindre (la memoire RAM peut contenir des preuves utiles). Signaler les autres postes potentiellement affectes.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num orange">4</div>
+          <div>
+            <h4>Activer la cellule de crise</h4>
+            <p>Prevenir la direction. Reunir le DSI, le responsable medical et administratif. Commencer a documenter toutes les actions sur papier. Evaluer si le passage en niveau ROUGE est necessaire.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-dl orange">
+        <div>
+          <strong>Fiche Reaction — Kit Orange</strong>
+          <p>A afficher dans la salle informatique et aux postes de soins</p>
+        </div>
+        <button class="modal-dl-btn" onclick="alert('PDF bientot disponible')">Telecharger</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay-red" onclick="if(event.target===this)closeModal('red')">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="section-label" style="margin-bottom:0.25rem; color:var(--red);">Niveau Rouge</div>
+        <h3 style="font-size:1.3rem;">Kit Crise Totale — Procedures completes</h3>
+      </div>
+      <button class="modal-close" onclick="closeModal('red')">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-steps">
+        <div class="modal-step">
+          <div class="step-num red">1</div>
+          <div>
+            <h4>Activer les fiches papier — IMMEDIATEMENT</h4>
+            <p>Recuperer les fiches papier pre-imprimees dans l'armoire de chaque service. Les distribuer au personnel soignant en priorite absolue. La continuite des soins prime sur tout autre objectif.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num red">2</div>
+          <div>
+            <h4>Isoler completement le reseau</h4>
+            <p>Sur instruction du DSI : couper tous les acces reseau. Debrancher les equipements non essentiels. Les appareils medicaux critiques (moniteurs, respirateurs) restent fonctionnels — ne pas les debrancher.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num red">3</div>
+          <div>
+            <h4>Alerter l'ANSSI et les autorites</h4>
+            <p>Appeler l'ANSSI au 3218, le CERT Sante et l'ARS. Signaler l'attaque a la CNIL si des donnees patients sont potentiellement compromises. Conserver tous les logs sur support externe isole du reseau.</p>
+          </div>
+        </div>
+        <div class="modal-step">
+          <div class="step-num red">4</div>
+          <div>
+            <h4>Maintenir les soins critiques</h4>
+            <p>Prioriser les patients en urgence vitale. Utiliser les fiches patients papier pour toute prescription et transmission entre equipes. Organiser des releves orales frequentes. La vie des patients est la priorite absolue.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-dl red">
+        <div>
+          <strong>Fiche Crise Totale — Kit Rouge</strong>
+          <p>A imprimer en avance et conserver dans chaque service</p>
+        </div>
+        <button class="modal-dl-btn" onclick="alert('PDF bientot disponible')">Telecharger</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+/* ─── NAVIGATION ─── */
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[id^="nav-"]').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  const nb = document.getElementById('nav-' + page);
+  if (nb) nb.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+/* ─── CLOCK ─── */
+function updateClock() {
+  const now = new Date();
+  const t = [now.getHours(), now.getMinutes(), now.getSeconds()]
+    .map(n => String(n).padStart(2, '0')).join(':');
+  const el = document.getElementById('dp-time');
+  if (el) el.textContent = t;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+/* ─── INCIDENT LEVEL ─── */
+const levelData = {
+  green: {
+    barTitle: 'NIVEAU VERT — Situation normale',
+    barDesc: 'Aucune attaque detectee. Appliquer les bonnes pratiques preventives.',
+    dpName: 'VERT — Situation normale',
+    alertLabel: 'Niveau Vert',
+    actions: [
+      'Verifier les sessions verrouillees a chaque poste',
+      'Rappel quotidien : ne pas cliquer sur liens suspects',
+      'Verifier le bon fonctionnement des sauvegardes',
+      'Confirmer que les mises a jour sont appliquees'
+    ]
+  },
+  orange: {
+    barTitle: 'NIVEAU ORANGE — Incident detecte',
+    barDesc: 'Incident detecte. Reagir immediatement et alerter la hierarchie.',
+    dpName: 'ORANGE — Incident en cours',
+    alertLabel: 'Niveau Orange',
+    actions: [
+      'Appeler le DSI par telephone maintenant',
+      'Isoler le poste suspect du reseau',
+      'Documenter toutes les observations sur papier',
+      'Prevenir la direction et activer la cellule de crise',
+      'Preparer les fiches papier en cas d\'escalade'
+    ]
+  },
+  red: {
+    barTitle: 'NIVEAU ROUGE — Crise totale',
+    barDesc: 'Systemes indisponibles. Basculer immediatement sur les procedures papier.',
+    dpName: 'ROUGE — Crise totale active',
+    alertLabel: 'Niveau Rouge',
+    actions: [
+      'PRIORITE : Distribuer les fiches papier dans tous les services',
+      'Maintenir les soins critiques — la vie prime sur tout',
+      'Couper le reseau sur instruction du DSI',
+      'Appeler l\'ANSSI au 3218',
+      'Signaler a la CNIL si donnees compromises',
+      'Documenter la chronologie complete'
+    ]
+  }
+};
+
+let currentLevel = 'green';
+let checkedActions = new Set();
+
+function setLevel(level) {
+  currentLevel = level;
+  const d = levelData[level];
+
+  // bar
+  const bar = document.getElementById('incident-bar');
+  bar.className = 'incident-level-bar ' + level;
+  document.getElementById('incident-bar-title').textContent = d.barTitle;
+  document.getElementById('incident-bar-desc').textContent = d.barDesc;
+
+  // nav alert
+  const gab = document.getElementById('global-alert-btn');
+  gab.className = 'nav-alert ' + level;
+  document.getElementById('global-alert-label').textContent = d.alertLabel;
+
+  // dp panel
+  const dp = document.getElementById('dp-main-level');
+  dp.className = 'dp-alert-level ' + level;
+  document.getElementById('dp-level-name').textContent = d.dpName;
+
+  // level buttons
+  ['green','orange','red'].forEach(l => {
+    document.getElementById('level-btn-'+l).classList.toggle('active', l === level);
+  });
+
+  // action list
+  checkedActions.clear();
+  renderActions(level);
+
+  // log
+  addLog('Niveau d\'alerte passe a : ' + d.alertLabel);
+}
+
+function renderActions(level) {
+  const list = document.getElementById('action-list');
+  const actions = levelData[level].actions;
+  list.innerHTML = '';
+  actions.forEach((a, i) => {
+    const li = document.createElement('li');
+    li.className = 'action-item' + (checkedActions.has(i) ? ' done' : '');
+    li.innerHTML = `<div class="action-check">${checkedActions.has(i) ? 'V' : ''}</div>${a}`;
+    li.onclick = () => toggleAction(i, level);
+    list.appendChild(li);
+  });
+  updateDpStats();
+}
+
+function toggleAction(i, level) {
+  if (checkedActions.has(i)) checkedActions.delete(i);
+  else {
+    checkedActions.add(i);
+    addLog(levelData[level].actions[i]);
+  }
+  renderActions(level);
+}
+
+function updateDpStats() {
+  const done = checkedActions.size;
+  const total = levelData[currentLevel].actions.length;
+  document.getElementById('dp-tasks-done').textContent = done;
+  document.getElementById('dp-tasks-total').textContent = total;
+}
+
+renderActions('green');
+
+/* ─── TIMER ─── */
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+
+function toggleTimer() {
+  const btn = document.getElementById('timer-start-btn');
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    btn.textContent = 'Reprendre';
+    addLog('Chronometre mis en pause');
+  } else {
+    timerInterval = setInterval(() => {
+      timerSeconds++;
+      updateTimerDisplay();
+    }, 1000);
+    timerRunning = true;
+    btn.textContent = 'Pause';
+    if (timerSeconds === 0) addLog('Chronometre de crise demarre');
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 0;
+  updateTimerDisplay();
+  document.getElementById('timer-start-btn').textContent = 'Demarrer';
+  addLog('Chronometre reinitialise');
+}
+
+function updateTimerDisplay() {
+  const h = Math.floor(timerSeconds / 3600);
+  const m = Math.floor((timerSeconds % 3600) / 60);
+  const s = timerSeconds % 60;
+  document.getElementById('timer-val').textContent =
+    [h, m, s].map(n => String(n).padStart(2, '0')).join(':');
+}
+
+function addLog(msg) {
+  const list = document.getElementById('log-list');
+  const now = new Date();
+  const t = [now.getHours(), now.getMinutes()].map(n => String(n).padStart(2,'0')).join(':');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry';
+  entry.innerHTML = `<span class="log-time">${t}</span><span class="log-msg">${msg}</span>`;
+  list.insertBefore(entry, list.firstChild);
+}
+
+/* ─── ROLE FILTER ─── */
+let currentRole = 'tous';
+
+function setRole(btn, role) {
+  currentRole = role;
+  document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterChecklists();
+}
+
+function filterChecklists() {
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    const roles = item.dataset.roles ? item.dataset.roles.split(',') : ['tous'];
+    item.style.display = (currentRole === 'tous' || roles.includes(currentRole)) ? '' : 'none';
+  });
+  updateProgress('green');
+  updateProgress('orange');
+  updateProgress('red');
+}
+
+/* ─── CHECKLIST ─── */
+function toggleCheck(el, color) {
+  el.classList.toggle('checked');
+  el.querySelector('.check-box').textContent = el.classList.contains('checked') ? 'V' : '';
+  updateProgress(color);
+}
+
+function updateProgress(color) {
+  const list = document.getElementById('checklist-' + color);
+  if (!list) return;
+  const items = Array.from(list.querySelectorAll('.checklist-item')).filter(i => i.style.display !== 'none');
+  const done = items.filter(i => i.classList.contains('checked')).length;
+  const pct = items.length ? (done / items.length * 100) : 0;
+  document.getElementById('prog-' + color).style.width = pct + '%';
+}
+
+/* ─── MODALS ─── */
+function openModal(color) {
+  document.getElementById('modal-overlay-' + color).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(color) {
+  document.getElementById('modal-overlay-' + color).classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    ['green','orange','red'].forEach(c => closeModal(c));
+  }
+});
+
+/* ─── TABS (Formation) ─── */
+function setTab(btn, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+/* ─── SIMULATEUR ─── */
+const scenarios = [
+  {
+    title: 'Ransomware hospitalier',
+    questions: [
+      {
+        situation: 'Il est 8h30. Une infirmiere du service cardiologie vous signale que son ecran affiche un message inhabituel : "Vos fichiers ont ete chiffres. Payez 50 000 EUR en Bitcoin dans 48h ou ils seront detruits." Elle ne peut plus acceder au dossier patient informatise.',
+        question: 'Quelle est votre premiere action immediale ?',
+        choices: [
+          { text: 'Eteindre immediatement l\'ordinateur pour stopper l\'attaque', correct: false },
+          { text: 'Ne rien toucher, noter l\'heure et appeler le DSI par telephone', correct: true },
+          { text: 'Payer la rancon rapidement pour recuperer les fichiers', correct: false },
+          { text: 'Essayer de supprimer le message avec l\'antivirus', correct: false }
+        ],
+        feedback_good: 'Correct. Il ne faut surtout pas eteindre la machine (les preuves en memoire seraient perdues) ni tenter de reparer seul. Appeler le DSI par telephone (pas par email, le reseau peut etre compromis) est la bonne action.',
+        feedback_bad: 'Incorrect. La premiere action est toujours de ne rien toucher et d\'appeler le DSI par telephone. Eteindre la machine detruit les preuves. Payer la rancon ne garantit rien et finance les criminels.'
+      },
+      {
+        situation: 'Le DSI est prevenu. Il vous demande d\'isoler le poste. Vous constatez que 3 autres postes dans le service affichent le meme message. Le DSI est encore occupe avec le premier poste.',
+        question: 'Comment procedez-vous pour les autres postes ?',
+        choices: [
+          { text: 'Attendre que le DSI soit libre pour chaque poste, ne rien toucher', correct: false },
+          { text: 'Debrancher le cable reseau de chaque poste affecte, sans les eteindre', correct: true },
+          { text: 'Eteindre tous les postes concernes pour stopper la propagation', correct: false },
+          { text: 'Continuer a travailler normalement, cela va se resoudre seul', correct: false }
+        ],
+        feedback_good: 'Excellent. Debrancher le cable reseau (sans eteindre) isole les postes et stoppe la propagation sur le reseau, tout en preservant les preuves en memoire vive.',
+        feedback_bad: 'Incorrect. Le bon geste est de debrancher le cable reseau sans eteindre les machines. Cela isole les postes du reseau et preserve les preuves.'
+      },
+      {
+        situation: 'Le service de cardiologie n\'a plus acces au DPI (Dossier Patient Informatise). Il y a 3 patients en cours de soins critiques.',
+        question: 'Comment maintenir la continuite des soins ?',
+        choices: [
+          { text: 'Suspendre tous les soins en attente du retour du systeme informatique', correct: false },
+          { text: 'Utiliser les fiches papier de secours pre-imprimees du service', correct: true },
+          { text: 'Acceder au DPI depuis un autre service non affecte', correct: false },
+          { text: 'Appeler le medecin chef pour annuler les soins non urgents uniquement', correct: false }
+        ],
+        feedback_good: 'Parfait. Les fiches papier de secours sont exactement prevues pour cette situation. Elles permettent de maintenir les soins sans aucun systeme informatique. Les soins ne doivent jamais etre interrompus.',
+        feedback_bad: 'Incorrect. Les soins critiques ne doivent jamais etre suspendus. Les fiches papier pre-imprimees sont prevues pour cette situation et permettent de maintenir les soins en mode degrade.'
+      }
+    ]
+  },
+  {
+    title: 'Phishing cibler personnel',
+    questions: [
+      {
+        situation: 'Vous recevez un email de "DSI-Hopital@securite-sante.fr" avec pour objet "URGENT - Mise a jour obligatoire mots de passe - Action requise dans 2h". L\'email contient un lien vers une page qui ressemble exactement au portail de votre hopital.',
+        question: 'Que faites-vous avec cet email ?',
+        choices: [
+          { text: 'Cliquer sur le lien car c\'est une mise a jour obligatoire urgente', correct: false },
+          { text: 'Ne pas cliquer, verifier l\'adresse email complete et signaler au DSI', correct: true },
+          { text: 'Transmettre l\'email a vos collegues pour les prevenir', correct: false },
+          { text: 'Repondre a l\'email pour demander confirmation', correct: false }
+        ],
+        feedback_good: 'Tres bien. L\'adresse "securite-sante.fr" n\'est pas le domaine officiel de votre hopital. L\'urgence artificielle est un signal d\'alarme classique du phishing. Signaler au DSI sans cliquer est la bonne reaction.',
+        feedback_bad: 'Incorrect. Cet email est un phishing. L\'urgence artificielle, le domaine suspect et la demande de credentials sont les signaux classiques. Ne jamais cliquer, ne jamais transmettre (vous propageriez l\'attaque), ne jamais repondre.'
+      },
+      {
+        situation: 'Un collegue a clique sur le lien et entre ses identifiants avant de se rendre compte que c\'etait suspect. Il vous le signale immediatement.',
+        question: 'Quelle est la priorite absolue dans les 5 prochaines minutes ?',
+        choices: [
+          { text: 'Attendre de voir si quelque chose se passe avant d\'agir', correct: false },
+          { text: 'Changer immediatement le mot de passe du compte depuis un autre poste et alerter le DSI', correct: true },
+          { text: 'Eteindre l\'ordinateur de votre collegue', correct: false },
+          { text: 'Verifier les emails recus sur ce compte pour detecter une intrusion', correct: false }
+        ],
+        feedback_good: 'Exactement. Le mot de passe doit etre change en urgence depuis un poste different (potentiellement non compromis). Le DSI doit etre alerte pour surveiller les acces au compte compromis.',
+        feedback_bad: 'Incorrect. Chaque minute compte apres la compromission d\'identifiants. Le mot de passe doit etre change immediatement depuis un autre poste, et le DSI alerte pour bloquer toute connexion suspecte.'
+      }
+    ]
+  },
+  {
+    title: 'Acces non autorise DPI',
+    questions: [
+      {
+        situation: 'Le systeme de logs signale que le compte d\'un medecin a accede a 847 dossiers patients en 3 heures cette nuit, alors que ce medecin etait en conge. Les acces proviennent d\'une adresse IP inconnue en dehors de l\'hopital.',
+        question: 'Quelle est la gravite de cet incident ?',
+        choices: [
+          { text: 'Faible — probablement une erreur technique du systeme de logs', correct: false },
+          { text: 'Critique — violation de donnees patients confirmee, niveau ROUGE a declencher', correct: true },
+          { text: 'Moyenne — a surveiller pendant 24h avant d\'agir', correct: false },
+          { text: 'Inconnue — attendre le retour du medecin pour l\'interroger', correct: false }
+        ],
+        feedback_good: 'Correct. L\'acces massif a des dossiers patients depuis un compte dont le titulaire est en conge, depuis une IP externe, est une violation de donnees confirmee. La CNIL doit etre notifiee dans les 72h. C\'est une situation de niveau ROUGE.',
+        feedback_bad: 'Incorrect. Un acces de 847 dossiers depuis un compte compromis via IP externe est une violation de donnees severe. Le niveau ROUGE doit etre declare et la CNIL notifiee dans les 72h (obligation legale RGPD).'
+      },
+      {
+        situation: 'Vous devez notifier les autorites. La violation date d\'il y a 6 heures. Vous avez 66 heures pour notifier la CNIL (delai RGPD : 72h).',
+        question: 'Quelles informations sont obligatoires dans la notification CNIL ?',
+        choices: [
+          { text: 'Uniquement le nombre de patients concernes', correct: false },
+          { text: 'Nature de la violation, categories de donnees, nombre de personnes, consequences probables, mesures prises', correct: true },
+          { text: 'Le nom du responsable IT et sa sanction', correct: false },
+          { text: 'La notification n\'est pas obligatoire si les donnees ne sont pas publiees', correct: false }
+        ],
+        feedback_good: 'Parfait. Le RGPD (article 33) exige une notification complete : nature de la violation, categories et volume de donnees, consequences probables pour les personnes, et mesures prises ou envisagees.',
+        feedback_bad: 'Incorrect. La notification CNIL doit inclure : la nature de la violation, les categories et le nombre de personnes concernees, les consequences probables et les mesures correctives. C\'est une obligation legale sous 72h.'
+      },
+      {
+        situation: 'L\'incident est maitrise. Le DSI propose de ne pas informer les patients dont les donnees ont ete exposees pour "eviter la panique".',
+        question: 'Quelle est la bonne decision legale et ethique ?',
+        choices: [
+          { text: 'Accepter — informer les patients n\'est pas obligatoire si les donnees ne sont pas publiees', correct: false },
+          { text: 'Informer les patients concernes si la violation est susceptible d\'engendrer un risque eleve', correct: true },
+          { text: 'Laisser la CNIL decider seule apres sa notification', correct: false },
+          { text: 'Informer uniquement les patients dont les donnees ont ete modifiees', correct: false }
+        ],
+        feedback_good: 'Correct. L\'article 34 du RGPD impose d\'informer les personnes concernees si la violation est susceptible d\'engendrer un risque eleve. Les patients ont le droit de savoir et de prendre des mesures de protection.',
+        feedback_bad: 'Incorrect. Le RGPD oblige l\'hopital a informer les patients si la violation presente un risque eleve pour leurs droits et libertes. Dissimuler une violation de donnees medicales est une faute legale et ethique grave.'
+      }
+    ]
+  }
+];
+
+let currentScenario = 0;
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+function loadScenario(idx, btn) {
+  currentScenario = idx;
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  document.querySelectorAll('.sim-scenario-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderQuestion();
+  document.getElementById('sim-result').classList.remove('show');
+  document.getElementById('sim-question-area').style.display = '';
+}
+
+function renderQuestion() {
+  const sc = scenarios[currentScenario];
+  document.getElementById('sim-title').textContent = sc.title;
+  updateSimScore();
+
+  const q = sc.questions[currentQuestion];
+  document.getElementById('sim-situation').textContent = q.situation;
+  document.getElementById('sim-question').textContent = q.question;
+
+  const choicesEl = document.getElementById('sim-choices');
+  choicesEl.innerHTML = '';
+  q.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'sim-choice';
+    btn.innerHTML = `<div class="choice-letter">${String.fromCharCode(65+i)}</div>${c.text}`;
+    btn.onclick = () => selectChoice(i, c.correct, q);
+    choicesEl.appendChild(btn);
+  });
+
+  document.getElementById('sim-feedback').className = 'sim-feedback';
+  document.getElementById('sim-feedback').textContent = '';
+  document.getElementById('sim-next-btn').className = 'sim-next-btn';
+  answered = false;
+}
+
+function selectChoice(idx, correct, q) {
+  if (answered) return;
+  answered = true;
+
+  const choices = document.querySelectorAll('.sim-choice');
+  choices.forEach((c, i) => {
+    c.classList.add('disabled');
+    if (q.choices[i].correct) c.classList.add(idx === i ? 'correct' : 'missed');
+  });
+  if (!q.choices[idx].correct) choices[idx].classList.add('wrong');
+
+  if (correct) score++;
+
+  const fb = document.getElementById('sim-feedback');
+  fb.className = 'sim-feedback show ' + (correct ? 'good' : 'bad');
+  fb.textContent = correct ? q.feedback_good : q.feedback_bad;
+
+  document.getElementById('sim-next-btn').className = 'sim-next-btn show';
+  updateSimScore();
+
+  // update global dp score
+  const total = scenarios[currentScenario].questions.length;
+  document.getElementById('dp-sim-score').textContent = score + '/' + total;
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  const sc = scenarios[currentScenario];
+  if (currentQuestion >= sc.questions.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('sim-question-area').style.display = 'none';
+  const result = document.getElementById('sim-result');
+  result.classList.add('show');
+  const total = scenarios[currentScenario].questions.length;
+  document.getElementById('sim-result-score').textContent = score + '/' + total;
+  const pct = (score / total) * 100;
+  let msg = '';
+  if (pct === 100) msg = 'Excellent ! Vous maitrisez parfaitement les procedures de gestion de crise. Partagez vos connaissances avec votre equipe.';
+  else if (pct >= 66) msg = 'Bon resultat. Quelques points a consolider. Relisez les procedures du kit correspondant et refaites le scenario.';
+  else msg = 'Des lacunes importantes ont ete identifiees. Consultez les kits de crise et la formation video avant de retenter le scenario.';
+  document.getElementById('sim-result-msg').textContent = msg;
+}
+
+function restartScenario() {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  document.getElementById('sim-result').classList.remove('show');
+  document.getElementById('sim-question-area').style.display = '';
+  renderQuestion();
+}
+
+function updateSimScore() {
+  const total = scenarios[currentScenario].questions.length;
+  document.getElementById('sim-score-badge').textContent = 'Score : ' + score + ' / ' + total;
+}
+
+/* ─── FICHE SELECTOR ─── */
+function showFiche(id, btn) {
+  document.querySelectorAll('.fiche-preview').forEach(f => f.classList.remove('active'));
+  document.querySelectorAll('.fiche-sel-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('fiche-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ─── PRINT FICHES ─── */
+function printFicheHTML(sheetId) {
+  const sheet = document.getElementById(sheetId);
+  if (!sheet) return;
+  const win = window.open('', '_blank', 'width=900,height=700');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>CyberCare — Fiche imprimable</title>
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;background:white;padding:1.5cm;}
+    @media print{body{padding:1cm;}}
+    .form-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:0.75rem;border-bottom:2px solid #111520;margin-bottom:0;}
+    .form-header-left{display:flex;align-items:center;gap:10px;}
+    .form-logo-box{width:34px;height:34px;background:#d0222e;color:white;display:grid;place-items:center;font-size:1.3rem;font-weight:700;border-radius:3px;flex-shrink:0;}
+    .form-hopital{font-family:'Martian Mono',monospace;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#111520;}
+    .form-service{font-size:0.72rem;color:#6b7585;margin-top:2px;}
+    .form-line-short{display:inline-block;width:90px;border-bottom:1px solid #9aa3b0;}
+    .form-header-right{text-align:right;}
+    .form-doc-title{font-family:'Martian Mono',monospace;font-size:0.9rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#111520;}
+    .form-doc-sub{font-family:'Martian Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.06em;color:#6b7585;margin-top:2px;}
+    .form-doc-ref{font-family:'Martian Mono',monospace;font-size:0.56rem;color:#9aa3b0;margin-top:2px;}
+    .form-alert-bar{padding:0.4rem 1rem;font-family:'Martian Mono',monospace;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;text-align:center;margin:0 -1.5cm 1rem;}
+    @media print{.form-alert-bar{margin:0 -1cm 1rem;}}
+    .form-alert-bar.red{background:#d0222e;color:white;}
+    .form-alert-bar.orange{background:#c05c00;color:white;}
+    .form-section-title{font-family:'Martian Mono',monospace;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aa3b0;border-bottom:1px solid #e4e8ee;padding-bottom:0.25rem;margin:0.9rem 0 0.6rem;}
+    .form-field{display:flex;flex-direction:column;gap:3px;}
+    .form-field label{font-size:0.65rem;color:#6b7585;font-family:'Martian Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;}
+    .form-input-line{border:none;border-bottom:1px solid #c9d0db;height:22px;width:100%;background:transparent;}
+    .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:0.6rem;}
+    .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.85rem;margin-bottom:0.6rem;}
+    .form-checkboxes{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-top:3px;}
+    .form-cb{display:flex;align-items:center;gap:3px;font-size:0.72rem;color:#2d3340;}
+    .form-box{width:12px;height:12px;border:1.5px solid #9aa3b0;border-radius:2px;flex-shrink:0;}
+    .form-box.green-box{border-color:#0a7c4a;}.form-box.orange-box{border-color:#c05c00;}.form-box.red-box{border-color:#d0222e;}
+    .form-box-line{flex:1;height:22px;border:none;border-bottom:1px solid #c9d0db;}
+    .form-vitaux-grid{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-vitaux-row{display:grid;grid-template-columns:60px 1fr 1fr 70px 60px 70px 60px;}
+    .form-vitaux-header{background:#f7f8fa;}
+    .form-vitaux-header span{font-family:'Martian Mono',monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-vitaux-row .form-box-line{border-radius:0;border-bottom:1px solid #e4e8ee;border-right:1px solid #e4e8ee;padding:0 3px;}
+    .form-soins-table{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-soins-row{display:flex;}.form-soins-header{background:#f7f8fa;}
+    .form-soins-header span{flex:1;font-family:'Martian Mono',monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-soins-row .form-box-line{border-radius:0;border-bottom:1px solid #e4e8ee;border-right:1px solid #e4e8ee;padding:0 3px;}
+    .form-prescriptions-table{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-presc-header{display:flex;background:#f7f8fa;}
+    .form-presc-header span{flex:1;font-family:'Martian Mono',monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-presc-row{display:flex;border-top:1px solid #e4e8ee;min-height:26px;align-items:center;}
+    .form-presc-row .form-box-line{border-radius:0;border-right:1px solid #e4e8ee;height:26px;padding:0 3px;}
+    .form-alertes-grid{display:flex;flex-direction:column;border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-alerte-row{display:flex;align-items:center;gap:0.6rem;padding:0.4rem 0.6rem;border-bottom:1px solid #e4e8ee;font-size:0.75rem;}
+    .form-alerte-row:last-child{border-bottom:none;}
+    .form-cb-col{flex-shrink:0;}.form-alerte-label{flex:2;font-size:0.75rem;color:#2d3340;}
+    .form-alerte-heure,.form-alerte-nom{display:flex;align-items:center;gap:3px;font-size:0.7rem;color:#6b7585;}
+    .form-alerte-nom{flex:1;}
+    .form-chrono-table{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.5rem;}
+    .form-chrono-header{display:flex;background:#f7f8fa;}
+    .form-chrono-header span{flex:1;font-family:'Martian Mono',monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-chrono-row{display:flex;border-top:1px solid #e4e8ee;align-items:center;}
+    .form-chrono-row .form-box-line{border-radius:0;border-right:1px solid #e4e8ee;height:24px;}
+    .form-footer-row{display:flex;gap:0.85rem;align-items:flex-end;margin-top:1rem;padding-top:0.85rem;border-top:1px solid #e4e8ee;}
+    .form-field-small{flex:1;display:flex;flex-direction:column;gap:3px;}
+    .form-field-small label{font-size:0.62rem;color:#6b7585;font-family:'Martian Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;}
+    .form-sig-box{height:40px;border:1.5px solid #111520;border-radius:3px;}
+    .form-print-note{margin-top:0.75rem;font-family:'Martian Mono',monospace;font-size:0.55rem;color:#c9d0db;text-align:center;border-top:1px solid #e4e8ee;padding-top:0.4rem;}
+    @media print{@page{margin:1cm;}button{display:none!important;}}
+  </style>
+  </head><body>${sheet.outerHTML}
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`);
+  win.document.close();
+}
+
+// Init
+loadScenario(0, document.querySelector('.sim-scenario-btn'));
+</script>
+</body>
+</html>
