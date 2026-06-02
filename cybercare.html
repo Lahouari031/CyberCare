@@ -854,6 +854,104 @@ nav {
 .video-title { font-weight: 500; font-size: 0.9rem; line-height: 1.35; margin-bottom: 0.4rem; }
 .video-desc { font-size: 0.8rem; color: var(--gray-400); line-height: 1.55; }
 
+.video-footer {
+  padding: 0 1.1rem 1rem;
+  border-top: 1px solid var(--gray-50);
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.pdf-download-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 1px solid var(--blue-border);
+  background: var(--blue-light);
+  color: var(--blue);
+  transition: all 0.15s;
+  width: 100%;
+  justify-content: center;
+}
+.pdf-download-btn:hover { background: var(--blue-mid); border-color: var(--blue); }
+.pdf-download-btn svg { flex-shrink: 0; }
+
+/* PDF Section on formation page */
+.pdf-resources-section {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gray-100);
+}
+.pdf-resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.pdf-resource-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: white;
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-lg);
+  transition: all 0.15s;
+}
+.pdf-resource-card:hover { border-color: var(--red-border); box-shadow: 0 4px 16px rgba(208,34,46,0.07); }
+.pdf-icon {
+  width: 42px; height: 42px;
+  background: var(--red-light);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  color: var(--red);
+}
+.pdf-icon svg { width: 20px; height: 20px; }
+.pdf-info { flex: 1; min-width: 0; }
+.pdf-name { font-weight: 500; font-size: 0.85rem; color: var(--gray-900); line-height: 1.3; margin-bottom: 2px; }
+.pdf-meta { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-300); }
+.pdf-dl-btn {
+  flex-shrink: 0;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  color: var(--gray-700);
+  transition: all 0.15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.pdf-dl-btn:hover { background: var(--gray-900); color: white; border-color: var(--gray-900); }
+
+/* Fiche PDF download button */
+.fiche-dl-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 1px solid var(--blue-border);
+  background: var(--blue-light);
+  color: var(--blue);
+  transition: all 0.15s;
+  margin-left: 0.5rem;
+}
+.fiche-dl-btn:hover { background: var(--blue-mid); border-color: var(--blue); }
+
 /* ─── SIMULATEUR ─── */
 .sim-container {
   display: grid;
@@ -1425,10 +1523,10 @@ footer {
     <div class="hero-left">
       <div class="hero-tag">
         <div class="alert-dot"></div>
-        Solution de cybersecurite hospitaliere
+        Solution de cybersécurité hospitalière
       </div>
-      <h1>Protegez votre hopital.<br><em>Meme sans reseau.</em></h1>
-      <p class="hero-sub">CyberCare fournit au personnel hospitalier les procedures, outils et ressources pour prevenir les cyberattaques, reagir rapidement et garantir la continuite des soins — meme hors ligne.</p>
+      <h1>Protégez votre hôpital.<br><em>Même sans réseau.</em></h1>
+      <p class="hero-sub">CyberCare fournit au personnel hospitalier les procédures, outils et ressources pour prévenir les cyberattaques, réagir rapidement et garantir la continuité des soins — même hors ligne.</p>
       <div class="hero-btns">
         <button class="btn btn-red" onclick="navigate('kits')">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="white"><path d="M10 2L2 7v11h6v-5h4v5h6V7L10 2z"/></svg>
@@ -1479,24 +1577,24 @@ footer {
     <div class="conform-item"><div class="conform-check">V</div>Conforme RGPD</div>
     <div class="conform-item"><div class="conform-check">V</div>PGSSI-S</div>
     <div class="conform-item"><div class="conform-check">V</div>Programme CaRE</div>
-    <div class="conform-item"><div class="conform-check">V</div>Hopitaux publics francais</div>
+    <div class="conform-item"><div class="conform-check">V</div>Hôpitaux publics francais</div>
     <div class="conform-item"><div class="conform-check">V</div>Disponible hors ligne</div>
   </div>
 
   <!-- STATUS CARDS -->
   <div class="status-section">
-    <div class="section-label">Systemes</div>
+    <div class="section-label">Systèmes</div>
     <div class="status-grid">
       <div class="status-card">
         <div class="status-card-top">
           <div class="status-icon blue">
             <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>
           </div>
-          <span class="status-badge ok">Operationnel</span>
+          <span class="status-badge ok">Opérationnel</span>
         </div>
         <div class="status-val">3</div>
         <div class="status-key">Kits de crise disponibles</div>
-        <div class="status-note">Vert, Orange, Rouge — accessibles hors ligne</div>
+        <div class="status-note">Vert, Orange, Rouge — accèssibles hors ligne</div>
       </div>
       <div class="status-card">
         <div class="status-card-top">
@@ -1531,7 +1629,7 @@ footer {
         <div class="alert-dot"></div>
         <div>
           <div class="incident-level-title" id="incident-bar-title">NIVEAU VERT — Situation normale</div>
-          <div class="incident-level-desc" id="incident-bar-desc">Aucune attaque detectee. Appliquer les bonnes pratiques preventives.</div>
+          <div class="incident-level-desc" id="incident-bar-desc">Aucune attaque détectée. Appliquer les bonnes pratiques préventives.</div>
         </div>
         <div class="level-selector">
           <button class="level-btn green active" onclick="setLevel('green')" id="level-btn-green">Vert</button>
@@ -1548,17 +1646,17 @@ footer {
           <h4>Chronometre de crise</h4>
           <div class="timer-display">
             <div class="timer-value" id="timer-val">00:00:00</div>
-            <div class="timer-label">Duree depuis declenchement</div>
+            <div class="timer-label">Duree depuis déclenchement</div>
           </div>
           <div class="timer-controls">
-            <button class="timer-btn primary" id="timer-start-btn" onclick="toggleTimer()">Demarrer</button>
-            <button class="timer-btn" onclick="resetTimer()">Reinitialiser</button>
+            <button class="timer-btn primary" id="timer-start-btn" onclick="toggleTimer()">Démarrer</button>
+            <button class="timer-btn" onclick="resetTimer()">Réinitialiser</button>
           </div>
           <h4 style="margin-top:1.25rem; margin-bottom:0.75rem;">Journal d'actions</h4>
           <div class="log-list" id="log-list">
             <div class="log-entry">
               <span class="log-time">--:--</span>
-              <span class="log-msg">Systeme pret. En attente d'incident.</span>
+              <span class="log-msg">Système pret. En attente d'incident.</span>
             </div>
           </div>
         </div>
@@ -1579,9 +1677,9 @@ footer {
 <div class="page" id="page-kits">
 
   <div class="page-header">
-    <p class="section-label" style="margin-bottom:0.5rem;">Reponse a incident</p>
+    <p class="section-label" style="margin-bottom:0.5rem;">Réponse a incident</p>
     <h2>Kits de crise</h2>
-    <p>Trois niveaux de reponse adaptes a la gravite de l'incident. Cliquez sur une action pour la valider. Selectionnez votre role pour des procedures personnalisees.</p>
+    <p>Trois niveaux de réponse adaptes a la gravite de l'incident. Cliquez sur une action pour la valider. Selectionnez votre role pour des procédures personnalisées.</p>
   </div>
 
   <div class="role-bar">
@@ -1589,7 +1687,7 @@ footer {
     <div class="role-btns">
       <button class="role-btn active" onclick="setRole(this,'tous')">Tous</button>
       <button class="role-btn" onclick="setRole(this,'infirmier')">Infirmier(e)</button>
-      <button class="role-btn" onclick="setRole(this,'medecin')">Medecin</button>
+      <button class="role-btn" onclick="setRole(this,'medecin')">Médecin</button>
       <button class="role-btn" onclick="setRole(this,'it')">Informatique / IT</button>
       <button class="role-btn" onclick="setRole(this,'direction')">Direction</button>
     </div>
@@ -1600,68 +1698,68 @@ footer {
     <!-- KIT VERT -->
     <div class="kit-card green">
       <div class="kit-card-header">
-        <span class="kit-level">Niveau Vert — Prevention</span>
+        <span class="kit-level">Niveau Vert — Prévention</span>
         <span class="kit-indicator"></span>
       </div>
       <div class="kit-card-body">
-        <h3>Mesures preventives</h3>
-        <p>Aucune attaque detectee. Appliquer les bonnes pratiques quotidiennes pour reduire les risques de cyberattaque.</p>
+        <h3>Mesures préventives</h3>
+        <p>Aucune attaque détectée. Appliquer les bonnes pratiques quotidiennes pour reduire les risques de cyberattaque.</p>
         <div class="kit-progress"><div class="kit-progress-bar" id="prog-green" style="width:0%"></div></div>
         <ul class="checklist" id="checklist-green">
           <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'green')">
-            <div class="check-box"></div>Verifier que votre session est bien verrouilee quand vous quittez un poste
+            <div class="check-box"></div>Vérifier que votre session est bien verrouilee quand vous quittez un poste
           </li>
           <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'green')">
-            <div class="check-box"></div>Ne pas cliquer sur des liens ou pieces jointes d'expediteurs inconnus
+            <div class="check-box"></div>Ne pas cliquer sur des liens ou pieces jointes d'expéditeurs inconnus
           </li>
           <li class="checklist-item" data-roles="it,direction" onclick="toggleCheck(this,'green')">
-            <div class="check-box"></div>Verifier que les sauvegardes automatiques fonctionnent
+            <div class="check-box"></div>Vérifier que les sauvegardes automatiques fonctionnent
           </li>
           <li class="checklist-item" data-roles="it" onclick="toggleCheck(this,'green')">
-            <div class="check-box"></div>Mettre a jour les logiciels et systemes d'exploitation
+            <div class="check-box"></div>Mettre à jour les logiciels et systèmes d'exploitation
           </li>
           <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'green')">
             <div class="check-box"></div>Utiliser un mot de passe robuste et unique pour chaque compte
           </li>
           <li class="checklist-item" data-roles="direction,it" onclick="toggleCheck(this,'green')">
-            <div class="check-box"></div>Sensibiliser les equipes aux risques cyber lors du briefing
+            <div class="check-box"></div>Sensibiliser les équipes aux risques cyber lors du briefing
           </li>
         </ul>
-        <button class="kit-expand-btn" onclick="openModal('green')">Voir les procedures completes</button>
+        <button class="kit-expand-btn" onclick="openModal('green')">Voir les procédures completes</button>
       </div>
     </div>
 
     <!-- KIT ORANGE -->
     <div class="kit-card orange">
       <div class="kit-card-header">
-        <span class="kit-level">Niveau Orange — Incident detecte</span>
+        <span class="kit-level">Niveau Orange — Incident détecté</span>
         <span class="kit-indicator"></span>
       </div>
       <div class="kit-card-body">
-        <h3>Reaction rapide</h3>
-        <p>Incident detecte ou comportement suspect. Agir immediatement pour limiter l'impact et alerter les responsables.</p>
+        <h3>Réaction rapide</h3>
+        <p>Incident détecté ou comportement suspect. Agir immédiatement pour limiter l'impact et alerter les responsables.</p>
         <div class="kit-progress"><div class="kit-progress-bar" id="prog-orange" style="width:0%"></div></div>
         <ul class="checklist" id="checklist-orange">
           <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'orange')">
-            <div class="check-box"></div>STOP — Ne rien faire d'autre. Notez l'heure exacte de detection
+            <div class="check-box"></div>STOP — Ne rien faire d'autre. Notez l'heure exacte de détection
           </li>
           <li class="checklist-item" data-roles="tous,infirmier,medecin" onclick="toggleCheck(this,'orange')">
             <div class="check-box"></div>Appeler le responsable informatique (DSI) par telephone
           </li>
           <li class="checklist-item" data-roles="it,direction" onclick="toggleCheck(this,'orange')">
-            <div class="check-box"></div>Debrancher le cable reseau du poste suspect (ne pas l'eteindre)
+            <div class="check-box"></div>Debrancher le cable réseau du poste suspect (ne pas l'éteindre)
           </li>
           <li class="checklist-item" data-roles="direction,it" onclick="toggleCheck(this,'orange')">
-            <div class="check-box"></div>Activer la cellule de crise et prevenir la direction
+            <div class="check-box"></div>Activer la cellule de crise et prévenir la direction
           </li>
           <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'orange')">
-            <div class="check-box"></div>Documenter toutes les actions sur papier (systeme potentiellement compromis)
+            <div class="check-box"></div>Documenter toutes les actions sur papier (système potentiellement compromis)
           </li>
           <li class="checklist-item" data-roles="medecin,infirmier" onclick="toggleCheck(this,'orange')">
-            <div class="check-box"></div>Preparer les fiches papier patients au cas ou le systeme serait indisponible
+            <div class="check-box"></div>Préparer les fiches papier patients au cas ou le système serait indisponible
           </li>
         </ul>
-        <button class="kit-expand-btn" onclick="openModal('orange')">Voir les procedures completes</button>
+        <button class="kit-expand-btn" onclick="openModal('orange')">Voir les procédures completes</button>
       </div>
     </div>
 
@@ -1672,30 +1770,30 @@ footer {
         <span class="kit-indicator"></span>
       </div>
       <div class="kit-card-body">
-        <h3>Continuite des soins</h3>
-        <p>Systemes informatiques indisponibles. Basculer immediatement sur les supports papier et maintenir les soins.</p>
+        <h3>Continuité des soins</h3>
+        <p>Systèmes informatiques indisponibles. Basculer immédiatement sur les supports papier et maintenir les soins.</p>
         <div class="kit-progress"><div class="kit-progress-bar" id="prog-red" style="width:0%"></div></div>
         <ul class="checklist" id="checklist-red">
           <li class="checklist-item" data-roles="tous,infirmier,medecin,it,direction" onclick="toggleCheck(this,'red')">
             <div class="check-box"></div>Recuperer les fiches papier pre-imprimees dans l'armoire du service
           </li>
           <li class="checklist-item" data-roles="medecin,infirmier" onclick="toggleCheck(this,'red')">
-            <div class="check-box"></div>Prioriser les patients en urgence vitale — la continuite des soins prime
+            <div class="check-box"></div>Prioriser les patients en urgence vitale — la continuité des soins prime
           </li>
           <li class="checklist-item" data-roles="it,direction" onclick="toggleCheck(this,'red')">
-            <div class="check-box"></div>Couper tous les acces reseau sur instruction du DSI
+            <div class="check-box"></div>Couper tous les accès réseau sur instruction du DSI
           </li>
           <li class="checklist-item" data-roles="direction,it" onclick="toggleCheck(this,'red')">
             <div class="check-box"></div>Appeler l'ANSSI au 3218 et signaler l'incident
           </li>
           <li class="checklist-item" data-roles="direction" onclick="toggleCheck(this,'red')">
-            <div class="check-box"></div>Signaler a la CNIL si des donnees patients sont compromises
+            <div class="check-box"></div>Signaler a la CNIL si des données patients sont compromises
           </li>
           <li class="checklist-item" data-roles="it" onclick="toggleCheck(this,'red')">
-            <div class="check-box"></div>Conserver tous les logs sur support externe isole
+            <div class="check-box"></div>Conserver tous les logs sur support externe isolé
           </li>
         </ul>
-        <button class="kit-expand-btn" onclick="openModal('red')">Voir les procedures completes</button>
+        <button class="kit-expand-btn" onclick="openModal('red')">Voir les procédures completes</button>
       </div>
     </div>
 
@@ -1714,7 +1812,7 @@ footer {
   <div class="page-header">
     <p class="section-label" style="margin-bottom:0.5rem;">Sensibilisation</p>
     <h2>Formation du personnel</h2>
-    <p>Modules courts et accessibles a tous. Testez vos connaissances avec le simulateur d'attaque interactif.</p>
+    <p>Modules courts et accèssibles a tous. Testez vos connaissances avec le simulateur d'attaque interactif.</p>
   </div>
 
   <div class="formation-layout">
@@ -1735,8 +1833,14 @@ footer {
           </div>
           <div class="video-body">
             <div class="video-cat">Niveau 1 — Bases</div>
-            <div class="video-title">Reconnaitre un email de phishing</div>
-            <p class="video-desc">Identifier les signaux d'alerte dans un email suspect et adopter les bons reflexes immediatement.</p>
+            <div class="video-title">Reconnaître un email de phishing</div>
+            <p class="video-desc">Identifier les signaux d'alerte dans un email suspect et adopter les bons bons réflexes immédiatement.</p>
+          </div>
+          <div class="video-footer">
+            <button class="pdf-download-btn" onclick="downloadPDF('phishing')">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm7 6a1 1 0 112 0v3.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 13.586V10z"/></svg>
+              Télécharger la fiche PDF
+            </button>
           </div>
         </div>
 
@@ -1747,9 +1851,15 @@ footer {
             <span class="video-dur">3:50</span>
           </div>
           <div class="video-body">
-            <div class="video-cat">Niveau 2 — Reaction</div>
+            <div class="video-cat">Niveau 2 — Réaction</div>
             <div class="video-title">Que faire en cas de ransomware ?</div>
-            <p class="video-desc">Les 5 premieres actions a realiser dans les 10 minutes suivant la detection d'un ransomware.</p>
+            <p class="video-desc">Les 5 premières actions à réaliser dans les 10 minutes suivant la détection d'un ransomware.</p>
+          </div>
+          <div class="video-footer">
+            <button class="pdf-download-btn" onclick="downloadPDF('ransomware')">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm7 6a1 1 0 112 0v3.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 13.586V10z"/></svg>
+              Télécharger la fiche PDF
+            </button>
           </div>
         </div>
 
@@ -1760,9 +1870,15 @@ footer {
             <span class="video-dur">5:00</span>
           </div>
           <div class="video-body">
-            <div class="video-cat">Niveau 3 — Continuite</div>
+            <div class="video-cat">Niveau 3 — Continuité</div>
             <div class="video-title">Utiliser le kit papier de secours</div>
-            <p class="video-desc">Comment remplir et utiliser les fiches papier patient en situation de crise totale sans aucun outil numerique.</p>
+            <p class="video-desc">Comment remplir et utiliser les fiches papier patient en situation de crise totale sans aucun outil numérique.</p>
+          </div>
+          <div class="video-footer">
+            <button class="pdf-download-btn" onclick="downloadPDF('kit-papier')">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm7 6a1 1 0 112 0v3.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 13.586V10z"/></svg>
+              Télécharger la fiche PDF
+            </button>
           </div>
         </div>
 
@@ -1773,13 +1889,93 @@ footer {
             <span class="video-dur">4:10</span>
           </div>
           <div class="video-body">
-            <div class="video-cat">Niveau 1 — Hygiene numerique</div>
-            <div class="video-title">Mots de passe et acces securises</div>
-            <p class="video-desc">Creer et gerer des mots de passe robustes sans gestionnaire complexe, pour tous les membres du personnel.</p>
+            <div class="video-cat">Niveau 1 — Hygiène numérique</div>
+            <div class="video-title">Mots de passe et accès sécurisés</div>
+            <p class="video-desc">Créer et gérer des mots de passe robustes sans gestionnaire complexe, pour tous les membres du personnel.</p>
+          </div>
+          <div class="video-footer">
+            <button class="pdf-download-btn" onclick="downloadPDF('mots-de-passe')">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm7 6a1 1 0 112 0v3.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L9 13.586V10z"/></svg>
+              Télécharger la fiche PDF
+            </button>
           </div>
         </div>
 
       </div>
+
+      <!-- RESSOURCES PDF -->
+      <div class="pdf-resources-section">
+        <div class="section-label">Ressources à télécharger</div>
+        <div class="pdf-resources-grid">
+          <div class="pdf-resource-card">
+            <div class="pdf-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+            <div class="pdf-info">
+              <div class="pdf-name">Guide anti-phishing hospitalier</div>
+              <div class="pdf-meta">PDF · 4 pages · Niveau 1</div>
+            </div>
+            <button class="pdf-dl-btn" onclick="downloadPDF('phishing')">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              PDF
+            </button>
+          </div>
+          <div class="pdf-resource-card">
+            <div class="pdf-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+            <div class="pdf-info">
+              <div class="pdf-name">Procédure réponse ransomware</div>
+              <div class="pdf-meta">PDF · 6 pages · Niveau 2</div>
+            </div>
+            <button class="pdf-dl-btn" onclick="downloadPDF('ransomware')">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              PDF
+            </button>
+          </div>
+          <div class="pdf-resource-card">
+            <div class="pdf-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+            <div class="pdf-info">
+              <div class="pdf-name">Guide utilisation kit papier secours</div>
+              <div class="pdf-meta">PDF · 3 pages · Niveau 3</div>
+            </div>
+            <button class="pdf-dl-btn" onclick="downloadPDF('kit-papier')">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              PDF
+            </button>
+          </div>
+          <div class="pdf-resource-card">
+            <div class="pdf-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+            <div class="pdf-info">
+              <div class="pdf-name">Politique mots de passe sécurisés</div>
+              <div class="pdf-meta">PDF · 2 pages · Hygiène numérique</div>
+            </div>
+            <button class="pdf-dl-btn" onclick="downloadPDF('mots-de-passe')">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              PDF
+            </button>
+          </div>
+          <div class="pdf-resource-card">
+            <div class="pdf-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+            <div class="pdf-info">
+              <div class="pdf-name">Synthèse programme CaRE / PGSSI-S</div>
+              <div class="pdf-meta">PDF · 5 pages · Réglementation</div>
+            </div>
+            <button class="pdf-dl-btn" onclick="downloadPDF('reglementation')">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              PDF
+            </button>
+          </div>
+          <div class="pdf-resource-card">
+            <div class="pdf-icon"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 4v12h12V8.828L11.172 4H4zM2 4a2 2 0 012-2h6l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+            <div class="pdf-info">
+              <div class="pdf-name">Kit de sensibilisation complet (tous modules)</div>
+              <div class="pdf-meta">PDF · 20 pages · Pack complet</div>
+            </div>
+            <button class="pdf-dl-btn" onclick="downloadPDF('pack-complet')">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /tab-videos -->
 
     <!-- SIMULATEUR -->
@@ -1798,7 +1994,7 @@ footer {
             </button>
             <button class="sim-scenario-btn" onclick="loadScenario(2,this)">
               <span class="sc-label">Scenario 3</span>
-              <span class="sc-name">Acces non autorise DPI</span>
+              <span class="sc-name">Accès non autorise DPI</span>
             </button>
           </div>
         </div>
@@ -1839,15 +2035,15 @@ footer {
 <div class="page" id="page-papier">
 
   <div class="page-header">
-    <p class="section-label" style="margin-bottom:0.5rem;">Mode degrade</p>
+    <p class="section-label" style="margin-bottom:0.5rem;">Mode dégradé</p>
     <h2>Support papier de secours</h2>
-    <p>Vraies fiches a remplir a la main. Imprimez-les en avance et rangez-les dans chaque service. Elles fonctionnent sans electricite ni reseau.</p>
+    <p>Vraies fiches a remplir a la main. Imprimez-les en avance et rangez-les dans chaque service. Elles fonctionnent sans electricite ni réseau.</p>
   </div>
 
   <div class="papier-intro">
     <div class="alert-banner">
       <div class="alert-banner-dot"></div>
-      <div><strong>En cas de niveau ROUGE :</strong> Ces fiches sont vos seuls outils. Imprimez plusieurs exemplaires de chaque, conservez-les dans l'armoire de chaque service. Remplissage au stylo noir uniquement. Principe de minimisation des donnees : 10 champs maximum par fiche.</div>
+      <div><strong>En cas de niveau ROUGE :</strong> Ces fiches sont vos seuls outils. Imprimez plusieurs exemplaires de chaque, conservez-les dans l'armoire de chaque service. Remplissage au stylo noir uniquement. Principe de minimisation des données : 10 champs maximum par fiche.</div>
     </div>
   </div>
 
@@ -1857,7 +2053,7 @@ footer {
     <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:2rem;">
       <button class="fiche-sel-btn active" onclick="showFiche('patient',this)">Fiche Patient</button>
       <button class="fiche-sel-btn" onclick="showFiche('soins',this)">Fiche Soins Infirmiers</button>
-      <button class="fiche-sel-btn" onclick="showFiche('medecin',this)">Fiche Prescription Medicale</button>
+      <button class="fiche-sel-btn" onclick="showFiche('medecin',this)">Fiche Prescription Médicale</button>
       <button class="fiche-sel-btn" onclick="showFiche('incident',this)">Registre Incident Cyber</button>
     </div>
   </div>
@@ -1869,33 +2065,35 @@ footer {
     <div class="fiche-preview active" id="fiche-patient">
       <div class="fiche-toolbar">
         <div>
-          <div class="fiche-tag red">Niveau ROUGE — Mode degrade</div>
+          <div class="fiche-tag red">Niveau ROUGE — Mode dégradé</div>
           <div class="fiche-toolbar-title">Fiche Patient — Identification &amp; Informations essentielles</div>
         </div>
         <button class="fiche-print-btn" onclick="printFicheHTML('fiche-patient-print')">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
           Imprimer cette fiche
         </button>
+        <button class="fiche-dl-btn" onclick="downloadFiche('fiche-patient-print','FP-01_CyberCare_Fiche-Patient')">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Télécharger PDF
+        </button>
       </div>
-
-      <!-- PRINTABLE FORM -->
       <div class="form-sheet" id="fiche-patient-print">
         <div class="form-header">
           <div class="form-header-left">
             <div class="form-logo-box">+</div>
             <div>
-              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-hopital">ÉTABLISSEMENT DE SANTE</div>
               <div class="form-service">Service : <span class="form-line-short"></span></div>
             </div>
           </div>
           <div class="form-header-right">
             <div class="form-doc-title">FICHE PATIENT</div>
-            <div class="form-doc-sub">MODE DEGRADE — CYBERINCIDENT</div>
+            <div class="form-doc-sub">MODE DÉGRADÉ — CYBERINCIDENT</div>
             <div class="form-doc-ref">REF : FP-01 / CyberCare</div>
           </div>
         </div>
         <div class="form-alert-bar red">
-          SYSTEME INFORMATIQUE INDISPONIBLE — REMPLIR AU STYLO NOIR — CONSERVER AVEC LE PATIENT
+          SYSTÈME INFORMATIQUE INDISPONIBLE — REMPLIR AU STYLO NOIR — CONSERVER AVEC LE PATIENT
         </div>
 
         <div class="form-section-title">IDENTIFICATION DU PATIENT</div>
@@ -1948,8 +2146,8 @@ footer {
 
         <div class="form-section-title">RESPONSABLES &amp; CONTACTS</div>
         <div class="form-row-2">
-          <div class="form-field"><label>Medecin referent</label><div class="form-input-line"></div></div>
-          <div class="form-field"><label>Infirmier(e) referent(e)</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Médecin référent</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Infirmier(e) référent(e)</label><div class="form-input-line"></div></div>
         </div>
         <div class="form-field"><label>Contact d'urgence (nom &amp; telephone)</label><div class="form-input-line"></div></div>
 
@@ -1959,7 +2157,7 @@ footer {
           <div class="form-field-small"><label>Heure</label><div class="form-input-line"></div></div>
           <div class="form-field-small"><label>Signature</label><div class="form-sig-box"></div></div>
         </div>
-        <div class="form-print-note">CyberCare / SecuriMed — Fiche FP-01 — Mode degrade cyberincident — Minimisation des donnees RGPD</div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche FP-01 — Mode dégradé cyberincident — Minimisation des données RGPD</div>
       </div>
     </div>
 
@@ -1967,12 +2165,16 @@ footer {
     <div class="fiche-preview" id="fiche-soins">
       <div class="fiche-toolbar">
         <div>
-          <div class="fiche-tag red">Niveau ROUGE — Mode degrade</div>
+          <div class="fiche-tag red">Niveau ROUGE — Mode dégradé</div>
           <div class="fiche-toolbar-title">Fiche Soins Infirmiers — Suivi &amp; Transmissions</div>
         </div>
         <button class="fiche-print-btn" onclick="printFicheHTML('fiche-soins-print')">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
           Imprimer cette fiche
+        </button>
+        <button class="fiche-dl-btn" onclick="downloadFiche('fiche-soins-print','FSI-02_CyberCare_Fiche-Soins-Infirmiers')">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Télécharger PDF
         </button>
       </div>
 
@@ -1981,18 +2183,18 @@ footer {
           <div class="form-header-left">
             <div class="form-logo-box">+</div>
             <div>
-              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-hopital">ÉTABLISSEMENT DE SANTE</div>
               <div class="form-service">Service : <span class="form-line-short"></span></div>
             </div>
           </div>
           <div class="form-header-right">
             <div class="form-doc-title">SOINS INFIRMIERS</div>
-            <div class="form-doc-sub">MODE DEGRADE — CYBERINCIDENT</div>
+            <div class="form-doc-sub">MODE DÉGRADÉ — CYBERINCIDENT</div>
             <div class="form-doc-ref">REF : FSI-02 / CyberCare</div>
           </div>
         </div>
         <div class="form-alert-bar red">
-          SYSTEME INFORMATIQUE INDISPONIBLE — REMPLIR AU STYLO NOIR — UNE FICHE PAR PATIENT PAR EQUIPE
+          SYSTÈME INFORMATIQUE INDISPONIBLE — REMPLIR AU STYLO NOIR — UNE FICHE PAR PATIENT PAR ÉQUIPE
         </div>
 
         <div class="form-section-title">IDENTIFICATION</div>
@@ -2003,10 +2205,10 @@ footer {
         </div>
         <div class="form-row-2">
           <div class="form-field"><label>Infirmier(e) responsable</label><div class="form-input-line"></div></div>
-          <div class="form-field"><label>Equipe (Matin / Apres-midi / Nuit)</label>
+          <div class="form-field"><label>Équipe (Matin / Après-midi / Nuit)</label>
             <div class="form-checkboxes">
               <label class="form-cb"><div class="form-box"></div> Matin</label>
-              <label class="form-cb"><div class="form-box"></div> Apres-midi</label>
+              <label class="form-cb"><div class="form-box"></div> Après-midi</label>
               <label class="form-cb"><div class="form-box"></div> Nuit</label>
             </div>
           </div>
@@ -2015,7 +2217,7 @@ footer {
         <div class="form-section-title">SIGNES VITAUX</div>
         <div class="form-vitaux-grid">
           <div class="form-vitaux-row form-vitaux-header">
-            <span>Heure</span><span>Pression arterielle</span><span>Frequence cardiaque</span><span>Temperature</span><span>SpO2</span><span>Frequence resp.</span><span>Paraphe</span>
+            <span>Heure</span><span>Pression artérielle</span><span>Fréquence cardiaque</span><span>Temperature</span><span>SpO2</span><span>Fréquence resp.</span><span>Paraphe</span>
           </div>
           <div class="form-vitaux-row"><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
           <div class="form-vitaux-row"><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div><div class="form-box-line"></div></div>
@@ -2036,17 +2238,17 @@ footer {
         </div>
 
         <div class="form-section-title">TRANSMISSIONS CIBLĖES</div>
-        <div class="form-field"><label>Donnees (observations, etat du patient)</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Données (observations, etat du patient)</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
         <div class="form-field"><label>Actions effectuees</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
         <div class="form-field"><label>Resultats et suite prevue</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
 
         <div class="form-footer-row">
           <div class="form-field-small"><label>Fiche redigee par</label><div class="form-input-line"></div></div>
-          <div class="form-field-small"><label>Heure fin equipe</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Heure fin équipe</label><div class="form-input-line"></div></div>
           <div class="form-field-small"><label>Signature</label><div class="form-sig-box"></div></div>
           <div class="form-field-small"><label>Transmission a</label><div class="form-input-line"></div></div>
         </div>
-        <div class="form-print-note">CyberCare / SecuriMed — Fiche FSI-02 — Mode degrade cyberincident — Minimisation des donnees RGPD</div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche FSI-02 — Mode dégradé cyberincident — Minimisation des données RGPD</div>
       </div>
     </div>
 
@@ -2054,10 +2256,17 @@ footer {
     <div class="fiche-preview" id="fiche-medecin">
       <div class="fiche-toolbar">
         <div>
-          <div class="fiche-tag red">Niveau ROUGE — Mode degrade</div>
-          <div class="fiche-toolbar-title">Fiche Prescription Medicale — Ordonnance de secours</div>
+          <div class="fiche-tag red">Niveau ROUGE — Mode dégradé</div>
+          <div class="fiche-toolbar-title">Fiche Prescription Médicale — Ordonnance de secours</div>
         </div>
         <button class="fiche-print-btn" onclick="printFicheHTML('fiche-medecin-print')">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+          Imprimer cette fiche
+        </button>
+        <button class="fiche-dl-btn" onclick="downloadFiche('fiche-medecin-print','FPM-03_CyberCare_Fiche-Prescription-Medicale')">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Télécharger PDF
+        </button>
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
           Imprimer cette fiche
         </button>
@@ -2068,18 +2277,18 @@ footer {
           <div class="form-header-left">
             <div class="form-logo-box">+</div>
             <div>
-              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
+              <div class="form-hopital">ÉTABLISSEMENT DE SANTE</div>
               <div class="form-service">Service : <span class="form-line-short"></span></div>
             </div>
           </div>
           <div class="form-header-right">
-            <div class="form-doc-title">PRESCRIPTION MEDICALE</div>
-            <div class="form-doc-sub">MODE DEGRADE — CYBERINCIDENT</div>
+            <div class="form-doc-title">PRESCRIPTION MÉDICALE</div>
+            <div class="form-doc-sub">MODE DÉGRADÉ — CYBERINCIDENT</div>
             <div class="form-doc-ref">REF : FPM-03 / CyberCare</div>
           </div>
         </div>
         <div class="form-alert-bar red">
-          ORDONNANCE DE SECOURS — SYSTEME INDISPONIBLE — VALEUR LEGALE AVEC SIGNATURE MANUSCRITE DU MEDECIN
+          ORDONNANCE DE SECOURS — SYSTÈME INDISPONIBLE — VALEUR LEGALE AVEC SIGNATURE MANUSCRITE DU MEDECIN
         </div>
 
         <div class="form-section-title">IDENTIFICATION PATIENT &amp; MEDECIN</div>
@@ -2093,7 +2302,7 @@ footer {
           <div class="form-field"><label>Allergies connues</label><div class="form-input-line"></div></div>
         </div>
         <div class="form-row-2">
-          <div class="form-field"><label>Medecin prescripteur (Nom &amp; Prenom)</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Médecin prescripteur (Nom &amp; Prenom)</label><div class="form-input-line"></div></div>
           <div class="form-field"><label>No RPPS</label><div class="form-input-line"></div></div>
         </div>
 
@@ -2102,7 +2311,7 @@ footer {
           <div class="form-presc-header">
             <span style="flex:3">Medicament (DCI) / Dose</span>
             <span style="flex:1.5">Voie d'administration</span>
-            <span style="flex:1">Frequence</span>
+            <span style="flex:1">Fréquence</span>
             <span style="flex:1.5">Duree / Fin le</span>
             <span style="flex:1">Urgence</span>
           </div>
@@ -2133,17 +2342,17 @@ footer {
 
         <div class="form-section-title">NOTES CLINIQUES</div>
         <div class="form-field"><label>Diagnostic / Evolution</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
-        <div class="form-field"><label>Consignes particulieres pour l'equipe soignante</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Consignes particulieres pour l'équipe soignante</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
 
         <div class="form-footer-row" style="margin-top:1rem;">
           <div class="form-field-small"><label>Date &amp; Heure</label><div class="form-input-line"></div></div>
           <div class="form-field-small"><label>Prochain passage prevu</label><div class="form-input-line"></div></div>
           <div style="flex:1">
-            <label style="font-size:0.68rem; font-family:monospace; text-transform:uppercase; letter-spacing:0.06em; color:#6b7585; display:block; margin-bottom:6px;">Signature manuscrite du medecin (OBLIGATOIRE)</label>
+            <label style="font-size:0.68rem; font-family:monospace; text-transform:uppercase; letter-spacing:0.06em; color:#6b7585; display:block; margin-bottom:6px;">Signature manuscrite du médecin (OBLIGATOIRE)</label>
             <div style="border:1.5px solid #111520; border-radius:4px; height:52px; background:white;"></div>
           </div>
         </div>
-        <div class="form-print-note">CyberCare / SecuriMed — Fiche FPM-03 — Mode degrade cyberincident — Valeur juridique avec signature manuscrite</div>
+        <div class="form-print-note">CyberCare / SecuriMed — Fiche FPM-03 — Mode dégradé cyberincident — Valeur juridique avec signature manuscrite</div>
       </div>
     </div>
 
@@ -2158,6 +2367,10 @@ footer {
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm-1-4a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
           Imprimer cette fiche
         </button>
+        <button class="fiche-dl-btn" onclick="downloadFiche('fiche-incident-print','RIC-04_CyberCare_Registre-Incident-Cyber')">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Télécharger PDF
+        </button>
       </div>
 
       <div class="form-sheet" id="fiche-incident-print">
@@ -2165,8 +2378,8 @@ footer {
           <div class="form-header-left">
             <div class="form-logo-box">+</div>
             <div>
-              <div class="form-hopital">ETABLISSEMENT DE SANTE</div>
-              <div class="form-service">Etablissement : <span class="form-line-short"></span></div>
+              <div class="form-hopital">ÉTABLISSEMENT DE SANTE</div>
+              <div class="form-service">Établissement : <span class="form-line-short"></span></div>
             </div>
           </div>
           <div class="form-header-right">
@@ -2176,13 +2389,13 @@ footer {
           </div>
         </div>
         <div class="form-alert-bar orange">
-          CONSERVER PRECIEUSEMENT — CE DOCUMENT SERA REQUIS PAR L'ANSSI ET LA CNIL — NE PAS DETRUIRE
+          CONSERVER PRÉCIEUSEMENT — CE DOCUMENT SERA REQUIS PAR L'ANSSI ET LA CNIL — NE PAS DETRUIRE
         </div>
 
-        <div class="form-section-title">DECLARATION D'INCIDENT</div>
+        <div class="form-section-title">DÉCLARATION D'INCIDENT</div>
         <div class="form-row-3">
-          <div class="form-field"><label>Date de detection</label><div class="form-input-line"></div></div>
-          <div class="form-field"><label>Heure de detection</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Date de détection</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Heure de détection</label><div class="form-input-line"></div></div>
           <div class="form-field"><label>Niveau d'alerte declare</label>
             <div class="form-checkboxes">
               <label class="form-cb"><div class="form-box green-box"></div> Vert</label>
@@ -2192,11 +2405,11 @@ footer {
           </div>
         </div>
         <div class="form-row-2">
-          <div class="form-field"><label>Declarant — Nom &amp; Prenom</label><div class="form-input-line"></div></div>
+          <div class="form-field"><label>Déclarant — Nom &amp; Prenom</label><div class="form-input-line"></div></div>
           <div class="form-field"><label>Fonction / Service</label><div class="form-input-line"></div></div>
         </div>
         <div class="form-field"><label>Description de l'incident (ce qui a ete observe)</label><div class="form-input-line"></div><div class="form-input-line"></div><div class="form-input-line"></div></div>
-        <div class="form-field"><label>Systemes / Postes affectes</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field"><label>Systèmes / Postes affectés</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
 
         <div class="form-section-title">ALERTES EMISES</div>
         <div class="form-alertes-grid">
@@ -2208,7 +2421,7 @@ footer {
           </div>
           <div class="form-alerte-row">
             <div class="form-cb-col"><div class="form-box"></div></div>
-            <div class="form-alerte-label">Direction de l'etablissement</div>
+            <div class="form-alerte-label">Direction de l'établissement</div>
             <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
             <div class="form-alerte-nom">Nom : <div class="form-box-line" style="flex:1;"></div></div>
           </div>
@@ -2226,7 +2439,7 @@ footer {
           </div>
           <div class="form-alerte-row">
             <div class="form-cb-col"><div class="form-box"></div></div>
-            <div class="form-alerte-label">CNIL (violation donnees patients)</div>
+            <div class="form-alerte-label">CNIL (violation données patients)</div>
             <div class="form-alerte-heure">Alerte a : <div class="form-box-line" style="width:80px;"></div></div>
             <div class="form-alerte-nom">Delai 72h — Echeance : <div class="form-box-line" style="flex:1;"></div></div>
           </div>
@@ -2242,10 +2455,10 @@ footer {
           <div class="form-chrono-row"><div class="form-box-line" style="width:70px;"></div><div class="form-box-line" style="flex:3;"></div><div class="form-box-line"></div></div>
         </div>
 
-        <div class="form-field" style="margin-top:0.75rem;"><label>Mesures de continuite des soins activees</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
+        <div class="form-field" style="margin-top:0.75rem;"><label>Mesures de continuité des soins activées</label><div class="form-input-line"></div><div class="form-input-line"></div></div>
 
         <div class="form-footer-row">
-          <div class="form-field-small"><label>Cloture de l'incident le</label><div class="form-input-line"></div></div>
+          <div class="form-field-small"><label>Clôture de l'incident le</label><div class="form-input-line"></div></div>
           <div class="form-field-small"><label>A</label><div class="form-input-line"></div></div>
           <div class="form-field-small"><label>Responsable incident</label><div class="form-input-line"></div></div>
           <div class="form-field-small"><label>Signature</label><div class="form-sig-box"></div></div>
@@ -2270,7 +2483,7 @@ footer {
     <div class="modal-head">
       <div>
         <div class="section-label" style="margin-bottom:0.25rem;">Niveau Vert</div>
-        <h3 style="font-size:1.3rem;">Kit Prevention — Procedures completes</h3>
+        <h3 style="font-size:1.3rem;">Kit Prévention — Procédures completes</h3>
       </div>
       <button class="modal-close" onclick="closeModal('green')">X</button>
     </div>
@@ -2279,38 +2492,38 @@ footer {
         <div class="modal-step">
           <div class="step-num green">1</div>
           <div>
-            <h4>Verifier les mots de passe et acces</h4>
-            <p>S'assurer que tous les comptes utilisent des mots de passe complexes d'au moins 12 caracteres (majuscules, chiffres, caracteres speciaux). Activer l'authentification a double facteur si disponible. Changer les mots de passe partages immediatement.</p>
+            <h4>Vérifier les mots de passe et accès</h4>
+            <p>S'assurer que tous les comptes utilisent des mots de passe complexes d'au moins 12 caractères (majuscules, chiffres, caractères spéciaux). Activer l'authentification a double facteur si disponible. Changer les mots de passe partages immédiatement.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num green">2</div>
           <div>
             <h4>Sensibiliser aux emails suspects</h4>
-            <p>Rappeler aux equipes de ne jamais cliquer sur un lien ou ouvrir une piece jointe d'un expediteur inconnu. Verifier l'adresse email complete de l'expediteur. Signaler tout email douteux au DSI avant toute action.</p>
+            <p>Rappeler aux équipes de ne jamais cliquer sur un lien ou ouvrir une piece jointe d'un expéditeur inconnu. Vérifier l'adresse email complete de l'expéditeur. Signaler tout email douteux au DSI avant toute action.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num green">3</div>
           <div>
-            <h4>Verifier les mises a jour systeme</h4>
-            <p>S'assurer que les systemes d'exploitation et logiciels medicaux sont a jour. Contacter le DSI si des mises a jour critiques sont en attente depuis plus de 7 jours. Les patches de securite sont prioritaires.</p>
+            <h4>Vérifier les mises à jour système</h4>
+            <p>S'assurer que les systèmes d'exploitation et logiciels medicaux sont à jour. Contacter le DSI si des mises à jour critiques sont en attente depuis plus de 7 jours. Les patches de sécurité sont prioritaires.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num green">4</div>
           <div>
-            <h4>Verifier les sauvegardes critiques</h4>
-            <p>Confirmer que les sauvegardes automatiques fonctionnent et que les dernieres sauvegardes sont recentes (moins de 24h). Tester la restauration si possible. Garder une copie hors ligne sur support physique isole.</p>
+            <h4>Vérifier les sauvegardes critiques</h4>
+            <p>Confirmer que les sauvegardes automatiques fonctionnent et que les dernieres sauvegardes sont recentes (moins de 24h). Tester la restauration si possible. Garder une copie hors ligne sur support physique isolé.</p>
           </div>
         </div>
       </div>
       <div class="modal-dl green">
         <div>
-          <strong>Fiche Prevention — Kit Vert</strong>
-          <p>Procedures completes a imprimer et afficher dans chaque service</p>
+          <strong>Fiche Prévention — Kit Vert</strong>
+          <p>Procédures completes a imprimer et afficher dans chaque service</p>
         </div>
-        <button class="modal-dl-btn" onclick="alert('PDF bientot disponible')">Telecharger</button>
+        <button class="modal-dl-btn" onclick="downloadPDF('kit-vert')">Télécharger</button>
       </div>
     </div>
   </div>
@@ -2321,7 +2534,7 @@ footer {
     <div class="modal-head">
       <div>
         <div class="section-label" style="margin-bottom:0.25rem; color:var(--orange);">Niveau Orange</div>
-        <h3 style="font-size:1.3rem;">Kit Reaction Rapide — Procedures completes</h3>
+        <h3 style="font-size:1.3rem;">Kit Réaction Rapide — Procédures completes</h3>
       </div>
       <button class="modal-close" onclick="closeModal('orange')">X</button>
     </div>
@@ -2330,38 +2543,38 @@ footer {
         <div class="modal-step">
           <div class="step-num orange">1</div>
           <div>
-            <h4>STOP — Preserver les preuves</h4>
-            <p>Ne pas eteindre les machines, ne pas supprimer de fichiers, ne pas tenter de reparer seul. Garder les preuves intactes. Noter l'heure exacte de detection et ce que vous avez observe (message, comportement anormal, etc.).</p>
+            <h4>STOP — Préserver les preuves</h4>
+            <p>Ne pas éteindre les machines, ne pas supprimer de fichiers, ne pas tenter de reparer seul. Garder les preuves intactes. Noter l'heure exacte de détection et ce que vous avez observe (message, comportement anormal, etc.).</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num orange">2</div>
           <div>
             <h4>Alerter le DSI par telephone</h4>
-            <p>Appeler immediatement le responsable informatique. Ne pas envoyer d'email (le reseau peut etre compromis). Decrire precisement : quel poste, quel symptome, a quelle heure. Rester disponible pour ses instructions.</p>
+            <p>Appeler immédiatement le responsable informatique. Ne pas envoyer d'email (le réseau peut etre compromis). Decrire precisement : quel poste, quel symptome, a quelle heure. Rester disponible pour ses instructions.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num orange">3</div>
           <div>
             <h4>Isoler le poste suspect</h4>
-            <p>Sur instruction du DSI uniquement : debrancher le cable reseau du poste concerne. Ne pas l'eteindre (la memoire RAM peut contenir des preuves utiles). Signaler les autres postes potentiellement affectes.</p>
+            <p>Sur instruction du DSI uniquement : debrancher le cable réseau du poste concerne. Ne pas l'éteindre (la memoire RAM peut contenir des preuves utiles). Signaler les autrès postes potentiellement affectés.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num orange">4</div>
           <div>
             <h4>Activer la cellule de crise</h4>
-            <p>Prevenir la direction. Reunir le DSI, le responsable medical et administratif. Commencer a documenter toutes les actions sur papier. Evaluer si le passage en niveau ROUGE est necessaire.</p>
+            <p>Prévenir la direction. Reunir le DSI, le responsable medical et administratif. Commencer a documenter toutes les actions sur papier. Evaluer si le passage en niveau ROUGE est necessaire.</p>
           </div>
         </div>
       </div>
       <div class="modal-dl orange">
         <div>
-          <strong>Fiche Reaction — Kit Orange</strong>
+          <strong>Fiche Réaction — Kit Orange</strong>
           <p>A afficher dans la salle informatique et aux postes de soins</p>
         </div>
-        <button class="modal-dl-btn" onclick="alert('PDF bientot disponible')">Telecharger</button>
+        <button class="modal-dl-btn" onclick="downloadPDF('kit-orange')">Télécharger</button>
       </div>
     </div>
   </div>
@@ -2372,7 +2585,7 @@ footer {
     <div class="modal-head">
       <div>
         <div class="section-label" style="margin-bottom:0.25rem; color:var(--red);">Niveau Rouge</div>
-        <h3 style="font-size:1.3rem;">Kit Crise Totale — Procedures completes</h3>
+        <h3 style="font-size:1.3rem;">Kit Crise Totale — Procédures completes</h3>
       </div>
       <button class="modal-close" onclick="closeModal('red')">X</button>
     </div>
@@ -2381,29 +2594,29 @@ footer {
         <div class="modal-step">
           <div class="step-num red">1</div>
           <div>
-            <h4>Activer les fiches papier — IMMEDIATEMENT</h4>
-            <p>Recuperer les fiches papier pre-imprimees dans l'armoire de chaque service. Les distribuer au personnel soignant en priorite absolue. La continuite des soins prime sur tout autre objectif.</p>
+            <h4>Activer les fiches papier — IMMÉDIATEMENT</h4>
+            <p>Recuperer les fiches papier pre-imprimees dans l'armoire de chaque service. Les distribuer au personnel soignant en priorité absolue. La continuité des soins prime sur tout autre objectif.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num red">2</div>
           <div>
-            <h4>Isoler completement le reseau</h4>
-            <p>Sur instruction du DSI : couper tous les acces reseau. Debrancher les equipements non essentiels. Les appareils medicaux critiques (moniteurs, respirateurs) restent fonctionnels — ne pas les debrancher.</p>
+            <h4>Isoler completement le réseau</h4>
+            <p>Sur instruction du DSI : couper tous les accès réseau. Debrancher les équipements non essentiels. Les appareils medicaux critiques (moniteurs, respirateurs) restent fonctionnels — ne pas les debrancher.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num red">3</div>
           <div>
             <h4>Alerter l'ANSSI et les autorites</h4>
-            <p>Appeler l'ANSSI au 3218, le CERT Sante et l'ARS. Signaler l'attaque a la CNIL si des donnees patients sont potentiellement compromises. Conserver tous les logs sur support externe isole du reseau.</p>
+            <p>Appeler l'ANSSI au 3218, le CERT Sante et l'ARS. Signaler l'attaque a la CNIL si des données patients sont potentiellement compromises. Conserver tous les logs sur support externe isolé du réseau.</p>
           </div>
         </div>
         <div class="modal-step">
           <div class="step-num red">4</div>
           <div>
             <h4>Maintenir les soins critiques</h4>
-            <p>Prioriser les patients en urgence vitale. Utiliser les fiches patients papier pour toute prescription et transmission entre equipes. Organiser des releves orales frequentes. La vie des patients est la priorite absolue.</p>
+            <p>Prioriser les patients en urgence vitale. Utiliser les fiches patients papier pour toute prescription et transmission entre équipes. Organiser des releves orales frequentes. La vie des patients est la priorité absolue.</p>
           </div>
         </div>
       </div>
@@ -2412,7 +2625,7 @@ footer {
           <strong>Fiche Crise Totale — Kit Rouge</strong>
           <p>A imprimer en avance et conserver dans chaque service</p>
         </div>
-        <button class="modal-dl-btn" onclick="alert('PDF bientot disponible')">Telecharger</button>
+        <button class="modal-dl-btn" onclick="downloadPDF('kit-rouge')">Télécharger</button>
       </div>
     </div>
   </div>
@@ -2445,40 +2658,40 @@ setInterval(updateClock, 1000);
 const levelData = {
   green: {
     barTitle: 'NIVEAU VERT — Situation normale',
-    barDesc: 'Aucune attaque detectee. Appliquer les bonnes pratiques preventives.',
+    barDesc: 'Aucune attaque détectée. Appliquer les bonnes pratiques préventives.',
     dpName: 'VERT — Situation normale',
     alertLabel: 'Niveau Vert',
     actions: [
-      'Verifier les sessions verrouillees a chaque poste',
+      'Vérifier les sessions verrouillees a chaque poste',
       'Rappel quotidien : ne pas cliquer sur liens suspects',
-      'Verifier le bon fonctionnement des sauvegardes',
-      'Confirmer que les mises a jour sont appliquees'
+      'Vérifier le bon fonctionnement des sauvegardes',
+      'Confirmer que les mises à jour sont appliquees'
     ]
   },
   orange: {
-    barTitle: 'NIVEAU ORANGE — Incident detecte',
-    barDesc: 'Incident detecte. Reagir immediatement et alerter la hierarchie.',
+    barTitle: 'NIVEAU ORANGE — Incident détecté',
+    barDesc: 'Incident détecté. Réagir immédiatement et alerter la hierarchie.',
     dpName: 'ORANGE — Incident en cours',
     alertLabel: 'Niveau Orange',
     actions: [
       'Appeler le DSI par telephone maintenant',
-      'Isoler le poste suspect du reseau',
+      'Isoler le poste suspect du réseau',
       'Documenter toutes les observations sur papier',
-      'Prevenir la direction et activer la cellule de crise',
-      'Preparer les fiches papier en cas d\'escalade'
+      'Prévenir la direction et activer la cellule de crise',
+      'Préparer les fiches papier en cas d\'escalade'
     ]
   },
   red: {
     barTitle: 'NIVEAU ROUGE — Crise totale',
-    barDesc: 'Systemes indisponibles. Basculer immediatement sur les procedures papier.',
+    barDesc: 'Systèmes indisponibles. Basculer immédiatement sur les procédures papier.',
     dpName: 'ROUGE — Crise totale active',
     alertLabel: 'Niveau Rouge',
     actions: [
       'PRIORITE : Distribuer les fiches papier dans tous les services',
       'Maintenir les soins critiques — la vie prime sur tout',
-      'Couper le reseau sur instruction du DSI',
+      'Couper le réseau sur instruction du DSI',
       'Appeler l\'ANSSI au 3218',
-      'Signaler a la CNIL si donnees compromises',
+      'Signaler a la CNIL si données compromises',
       'Documenter la chronologie complete'
     ]
   }
@@ -2580,7 +2793,7 @@ function resetTimer() {
   timerRunning = false;
   timerSeconds = 0;
   updateTimerDisplay();
-  document.getElementById('timer-start-btn').textContent = 'Demarrer';
+  document.getElementById('timer-start-btn').textContent = 'Démarrer';
   addLog('Chronometre reinitialise');
 }
 
@@ -2672,37 +2885,37 @@ const scenarios = [
         situation: 'Il est 8h30. Une infirmiere du service cardiologie vous signale que son ecran affiche un message inhabituel : "Vos fichiers ont ete chiffres. Payez 50 000 EUR en Bitcoin dans 48h ou ils seront detruits." Elle ne peut plus acceder au dossier patient informatise.',
         question: 'Quelle est votre premiere action immediale ?',
         choices: [
-          { text: 'Eteindre immediatement l\'ordinateur pour stopper l\'attaque', correct: false },
+          { text: 'Éteindre immédiatement l\'ordinateur pour stopper l\'attaque', correct: false },
           { text: 'Ne rien toucher, noter l\'heure et appeler le DSI par telephone', correct: true },
           { text: 'Payer la rancon rapidement pour recuperer les fichiers', correct: false },
           { text: 'Essayer de supprimer le message avec l\'antivirus', correct: false }
         ],
-        feedback_good: 'Correct. Il ne faut surtout pas eteindre la machine (les preuves en memoire seraient perdues) ni tenter de reparer seul. Appeler le DSI par telephone (pas par email, le reseau peut etre compromis) est la bonne action.',
-        feedback_bad: 'Incorrect. La premiere action est toujours de ne rien toucher et d\'appeler le DSI par telephone. Eteindre la machine detruit les preuves. Payer la rancon ne garantit rien et finance les criminels.'
+        feedback_good: 'Correct. Il ne faut surtout pas éteindre la machine (les preuves en memoire seraient perdues) ni tenter de reparer seul. Appeler le DSI par telephone (pas par email, le réseau peut etre compromis) est la bonne action.',
+        feedback_bad: 'Incorrect. La premiere action est toujours de ne rien toucher et d\'appeler le DSI par telephone. Éteindre la machine detruit les preuves. Payer la rancon ne garantit rien et finance les criminels.'
       },
       {
-        situation: 'Le DSI est prevenu. Il vous demande d\'isoler le poste. Vous constatez que 3 autres postes dans le service affichent le meme message. Le DSI est encore occupe avec le premier poste.',
-        question: 'Comment procedez-vous pour les autres postes ?',
+        situation: 'Le DSI est prévenu. Il vous demande d\'isolér le poste. Vous constatez que 3 autrès postes dans le service affichent le même message. Le DSI est encore occupe avec le premier poste.',
+        question: 'Comment procedez-vous pour les autrès postes ?',
         choices: [
           { text: 'Attendre que le DSI soit libre pour chaque poste, ne rien toucher', correct: false },
-          { text: 'Debrancher le cable reseau de chaque poste affecte, sans les eteindre', correct: true },
-          { text: 'Eteindre tous les postes concernes pour stopper la propagation', correct: false },
+          { text: 'Debrancher le cable réseau de chaque poste affecte, sans les éteindre', correct: true },
+          { text: 'Éteindre tous les postes concernes pour stopper la propagation', correct: false },
           { text: 'Continuer a travailler normalement, cela va se resoudre seul', correct: false }
         ],
-        feedback_good: 'Excellent. Debrancher le cable reseau (sans eteindre) isole les postes et stoppe la propagation sur le reseau, tout en preservant les preuves en memoire vive.',
-        feedback_bad: 'Incorrect. Le bon geste est de debrancher le cable reseau sans eteindre les machines. Cela isole les postes du reseau et preserve les preuves.'
+        feedback_good: 'Excellent. Debrancher le cable réseau (sans éteindre) isolé les postes et stoppe la propagation sur le réseau, tout en preservant les preuves en memoire vive.',
+        feedback_bad: 'Incorrect. Le bon geste est de debrancher le cable réseau sans éteindre les machines. Cela isolé les postes du réseau et preserve les preuves.'
       },
       {
-        situation: 'Le service de cardiologie n\'a plus acces au DPI (Dossier Patient Informatise). Il y a 3 patients en cours de soins critiques.',
-        question: 'Comment maintenir la continuite des soins ?',
+        situation: 'Le service de cardiologie n\'a plus accès au DPI (Dossier Patient Informatise). Il y a 3 patients en cours de soins critiques.',
+        question: 'Comment maintenir la continuité des soins ?',
         choices: [
-          { text: 'Suspendre tous les soins en attente du retour du systeme informatique', correct: false },
+          { text: 'Suspendre tous les soins en attente du retour du système informatique', correct: false },
           { text: 'Utiliser les fiches papier de secours pre-imprimees du service', correct: true },
           { text: 'Acceder au DPI depuis un autre service non affecte', correct: false },
-          { text: 'Appeler le medecin chef pour annuler les soins non urgents uniquement', correct: false }
+          { text: 'Appeler le médecin chef pour annuler les soins non urgents uniquement', correct: false }
         ],
-        feedback_good: 'Parfait. Les fiches papier de secours sont exactement prevues pour cette situation. Elles permettent de maintenir les soins sans aucun systeme informatique. Les soins ne doivent jamais etre interrompus.',
-        feedback_bad: 'Incorrect. Les soins critiques ne doivent jamais etre suspendus. Les fiches papier pre-imprimees sont prevues pour cette situation et permettent de maintenir les soins en mode degrade.'
+        feedback_good: 'Parfait. Les fiches papier de secours sont exactement prevues pour cette situation. Elles permettent de maintenir les soins sans aucun système informatique. Les soins ne doivent jamais etre interrompus.',
+        feedback_bad: 'Incorrect. Les soins critiques ne doivent jamais etre suspendus. Les fiches papier pre-imprimees sont prevues pour cette situation et permettent de maintenir les soins en mode dégradé.'
       }
     ]
   },
@@ -2710,69 +2923,69 @@ const scenarios = [
     title: 'Phishing cibler personnel',
     questions: [
       {
-        situation: 'Vous recevez un email de "DSI-Hopital@securite-sante.fr" avec pour objet "URGENT - Mise a jour obligatoire mots de passe - Action requise dans 2h". L\'email contient un lien vers une page qui ressemble exactement au portail de votre hopital.',
+        situation: 'Vous recevez un email de "DSI-Hôpital@sécurité-sante.fr" avec pour objet "URGENT - Mise à jour obligatoire mots de passe - Action requise dans 2h". L\'email contient un lien vers une page qui ressemble exactement au portail de votre hôpital.',
         question: 'Que faites-vous avec cet email ?',
         choices: [
-          { text: 'Cliquer sur le lien car c\'est une mise a jour obligatoire urgente', correct: false },
-          { text: 'Ne pas cliquer, verifier l\'adresse email complete et signaler au DSI', correct: true },
-          { text: 'Transmettre l\'email a vos collegues pour les prevenir', correct: false },
+          { text: 'Cliquer sur le lien car c\'est une mise à jour obligatoire urgente', correct: false },
+          { text: 'Ne pas cliquer, vérifiér l\'adresse email complete et signaler au DSI', correct: true },
+          { text: 'Transmettre l\'email a vos collegues pour les prévenir', correct: false },
           { text: 'Repondre a l\'email pour demander confirmation', correct: false }
         ],
-        feedback_good: 'Tres bien. L\'adresse "securite-sante.fr" n\'est pas le domaine officiel de votre hopital. L\'urgence artificielle est un signal d\'alarme classique du phishing. Signaler au DSI sans cliquer est la bonne reaction.',
+        feedback_good: 'Très bien. L\'adresse "sécurité-sante.fr" n\'est pas le domaine officiel de votre hôpital. L\'urgence artificielle est un signal d\'alarme classique du phishing. Signaler au DSI sans cliquer est la bonne réaction.',
         feedback_bad: 'Incorrect. Cet email est un phishing. L\'urgence artificielle, le domaine suspect et la demande de credentials sont les signaux classiques. Ne jamais cliquer, ne jamais transmettre (vous propageriez l\'attaque), ne jamais repondre.'
       },
       {
-        situation: 'Un collegue a clique sur le lien et entre ses identifiants avant de se rendre compte que c\'etait suspect. Il vous le signale immediatement.',
-        question: 'Quelle est la priorite absolue dans les 5 prochaines minutes ?',
+        situation: 'Un collegue a clique sur le lien et entre ses identifiants avant de se rendre compte que c\'etait suspect. Il vous le signale immédiatement.',
+        question: 'Quelle est la priorité absolue dans les 5 prochaines minutes ?',
         choices: [
           { text: 'Attendre de voir si quelque chose se passe avant d\'agir', correct: false },
-          { text: 'Changer immediatement le mot de passe du compte depuis un autre poste et alerter le DSI', correct: true },
-          { text: 'Eteindre l\'ordinateur de votre collegue', correct: false },
-          { text: 'Verifier les emails recus sur ce compte pour detecter une intrusion', correct: false }
+          { text: 'Changer immédiatement le mot de passe du compte depuis un autre poste et alerter le DSI', correct: true },
+          { text: 'Éteindre l\'ordinateur de votre collegue', correct: false },
+          { text: 'Vérifier les emails recus sur ce compte pour détectér une intrusion', correct: false }
         ],
-        feedback_good: 'Exactement. Le mot de passe doit etre change en urgence depuis un poste different (potentiellement non compromis). Le DSI doit etre alerte pour surveiller les acces au compte compromis.',
-        feedback_bad: 'Incorrect. Chaque minute compte apres la compromission d\'identifiants. Le mot de passe doit etre change immediatement depuis un autre poste, et le DSI alerte pour bloquer toute connexion suspecte.'
+        feedback_good: 'Exactement. Le mot de passe doit etre change en urgence depuis un poste different (potentiellement non compromis). Le DSI doit etre alerte pour surveiller les accès au compte compromis.',
+        feedback_bad: 'Incorrect. Chaque minute compte apres la compromission d\'identifiants. Le mot de passe doit etre change immédiatement depuis un autre poste, et le DSI alerte pour bloquér toute connexion suspecte.'
       }
     ]
   },
   {
-    title: 'Acces non autorise DPI',
+    title: 'Accès non autorise DPI',
     questions: [
       {
-        situation: 'Le systeme de logs signale que le compte d\'un medecin a accede a 847 dossiers patients en 3 heures cette nuit, alors que ce medecin etait en conge. Les acces proviennent d\'une adresse IP inconnue en dehors de l\'hopital.',
+        situation: 'Le système de logs signale que le compte d\'un médecin a accede a 847 dossiers patients en 3 heures cette nuit, alors que ce médecin etait en conge. Les accès proviennent d\'une adresse IP inconnue en dehors de l\'hôpital.',
         question: 'Quelle est la gravite de cet incident ?',
         choices: [
-          { text: 'Faible — probablement une erreur technique du systeme de logs', correct: false },
-          { text: 'Critique — violation de donnees patients confirmee, niveau ROUGE a declencher', correct: true },
+          { text: 'Faible — probablement une erreur technique du système de logs', correct: false },
+          { text: 'Critique — violation de données patients confirmee, niveau ROUGE a déclenchér', correct: true },
           { text: 'Moyenne — a surveiller pendant 24h avant d\'agir', correct: false },
-          { text: 'Inconnue — attendre le retour du medecin pour l\'interroger', correct: false }
+          { text: 'Inconnue — attendre le retour du médecin pour l\'interroger', correct: false }
         ],
-        feedback_good: 'Correct. L\'acces massif a des dossiers patients depuis un compte dont le titulaire est en conge, depuis une IP externe, est une violation de donnees confirmee. La CNIL doit etre notifiee dans les 72h. C\'est une situation de niveau ROUGE.',
-        feedback_bad: 'Incorrect. Un acces de 847 dossiers depuis un compte compromis via IP externe est une violation de donnees severe. Le niveau ROUGE doit etre declare et la CNIL notifiee dans les 72h (obligation legale RGPD).'
+        feedback_good: 'Correct. L\'accès massif a des dossiers patients depuis un compte dont le titulaire est en conge, depuis une IP externe, est une violation de données confirmee. La CNIL doit etre notifiee dans les 72h. C\'est une situation de niveau ROUGE.',
+        feedback_bad: 'Incorrect. Un accès de 847 dossiers depuis un compte compromis via IP externe est une violation de données severe. Le niveau ROUGE doit etre declare et la CNIL notifiee dans les 72h (obligation legale RGPD).'
       },
       {
         situation: 'Vous devez notifier les autorites. La violation date d\'il y a 6 heures. Vous avez 66 heures pour notifier la CNIL (delai RGPD : 72h).',
         question: 'Quelles informations sont obligatoires dans la notification CNIL ?',
         choices: [
           { text: 'Uniquement le nombre de patients concernes', correct: false },
-          { text: 'Nature de la violation, categories de donnees, nombre de personnes, consequences probables, mesures prises', correct: true },
+          { text: 'Nature de la violation, categories de données, nombre de personnes, consequences probables, mesures prises', correct: true },
           { text: 'Le nom du responsable IT et sa sanction', correct: false },
-          { text: 'La notification n\'est pas obligatoire si les donnees ne sont pas publiees', correct: false }
+          { text: 'La notification n\'est pas obligatoire si les données ne sont pas publiees', correct: false }
         ],
-        feedback_good: 'Parfait. Le RGPD (article 33) exige une notification complete : nature de la violation, categories et volume de donnees, consequences probables pour les personnes, et mesures prises ou envisagees.',
+        feedback_good: 'Parfait. Le RGPD (article 33) exige une notification complete : nature de la violation, categories et volume de données, consequences probables pour les personnes, et mesures prises ou envisagees.',
         feedback_bad: 'Incorrect. La notification CNIL doit inclure : la nature de la violation, les categories et le nombre de personnes concernees, les consequences probables et les mesures correctives. C\'est une obligation legale sous 72h.'
       },
       {
-        situation: 'L\'incident est maitrise. Le DSI propose de ne pas informer les patients dont les donnees ont ete exposees pour "eviter la panique".',
+        situation: 'L\'incident est maitrise. Le DSI propose de ne pas informer les patients dont les données ont ete exposees pour "eviter la panique".',
         question: 'Quelle est la bonne decision legale et ethique ?',
         choices: [
-          { text: 'Accepter — informer les patients n\'est pas obligatoire si les donnees ne sont pas publiees', correct: false },
+          { text: 'Accepter — informer les patients n\'est pas obligatoire si les données ne sont pas publiees', correct: false },
           { text: 'Informer les patients concernes si la violation est susceptible d\'engendrer un risque eleve', correct: true },
           { text: 'Laisser la CNIL decider seule apres sa notification', correct: false },
-          { text: 'Informer uniquement les patients dont les donnees ont ete modifiees', correct: false }
+          { text: 'Informer uniquement les patients dont les données ont ete modifiees', correct: false }
         ],
         feedback_good: 'Correct. L\'article 34 du RGPD impose d\'informer les personnes concernees si la violation est susceptible d\'engendrer un risque eleve. Les patients ont le droit de savoir et de prendre des mesures de protection.',
-        feedback_bad: 'Incorrect. Le RGPD oblige l\'hopital a informer les patients si la violation presente un risque eleve pour leurs droits et libertes. Dissimuler une violation de donnees medicales est une faute legale et ethique grave.'
+        feedback_bad: 'Incorrect. Le RGPD oblige l\'hôpital a informer les patients si la violation presente un risque eleve pour leurs droits et libertes. Dissimuler une violation de données medicales est une faute legale et ethique grave.'
       }
     ]
   }
@@ -2863,9 +3076,9 @@ function showResult() {
   document.getElementById('sim-result-score').textContent = score + '/' + total;
   const pct = (score / total) * 100;
   let msg = '';
-  if (pct === 100) msg = 'Excellent ! Vous maitrisez parfaitement les procedures de gestion de crise. Partagez vos connaissances avec votre equipe.';
-  else if (pct >= 66) msg = 'Bon resultat. Quelques points a consolider. Relisez les procedures du kit correspondant et refaites le scenario.';
-  else msg = 'Des lacunes importantes ont ete identifiees. Consultez les kits de crise et la formation video avant de retenter le scenario.';
+  if (pct === 100) msg = 'Excellent ! Vous maitrisez parfaitement les procédures de gestion de crise. Partagez vos connaissances avec votre équipe.';
+  else if (pct >= 66) msg = 'Bon resultat. Quelques points a consolider. Relisez les procédures du kit correspondant et refaites le scenario.';
+  else msg = 'Des lacunes importantes ont ete identifiées. Consultez les kits de crise et la formation video avant de retenter le scenario.';
   document.getElementById('sim-result-msg').textContent = msg;
 }
 
@@ -2966,12 +3179,264 @@ function printFicheHTML(sheetId) {
   win.document.close();
 }
 
+/* ─── TÉLÉCHARGEMENT FICHES EN HTML (sauvegarde navigateur) ─── */
+function downloadFiche(sheetId, filename) {
+  const sheet = document.getElementById(sheetId);
+  if (!sheet) return;
+  const styles = `
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;background:white;padding:1.5cm;}
+    .form-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:0.75rem;border-bottom:2px solid #111520;margin-bottom:0;}
+    .form-header-left{display:flex;align-items:center;gap:10px;}
+    .form-logo-box{width:34px;height:34px;background:#d0222e;color:white;display:grid;place-items:center;font-size:1.3rem;font-weight:700;border-radius:3px;flex-shrink:0;}
+    .form-hopital{font-family:monospace;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#111520;}
+    .form-service{font-size:0.72rem;color:#6b7585;margin-top:2px;}
+    .form-line-short{display:inline-block;width:90px;border-bottom:1px solid #9aa3b0;}
+    .form-header-right{text-align:right;}
+    .form-doc-title{font-family:monospace;font-size:0.9rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#111520;}
+    .form-doc-sub{font-family:monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.06em;color:#6b7585;margin-top:2px;}
+    .form-doc-ref{font-family:monospace;font-size:0.56rem;color:#9aa3b0;margin-top:2px;}
+    .form-alert-bar{padding:0.4rem 1rem;font-family:monospace;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;text-align:center;margin:0 0 1rem;}
+    .form-alert-bar.red{background:#d0222e;color:white;}
+    .form-alert-bar.orange{background:#c05c00;color:white;}
+    .form-section-title{font-family:monospace;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aa3b0;border-bottom:1px solid #e4e8ee;padding-bottom:0.25rem;margin:0.9rem 0 0.6rem;}
+    .form-field{display:flex;flex-direction:column;gap:3px;margin-bottom:0.6rem;}
+    .form-field label{font-size:0.65rem;color:#6b7585;font-family:monospace;text-transform:uppercase;letter-spacing:0.05em;}
+    .form-input-line{border:none;border-bottom:1px solid #c9d0db;height:22px;width:100%;background:transparent;}
+    .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:0.6rem;}
+    .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.85rem;margin-bottom:0.6rem;}
+    .form-checkboxes{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-top:3px;}
+    .form-cb{display:flex;align-items:center;gap:3px;font-size:0.72rem;color:#2d3340;}
+    .form-box{width:12px;height:12px;border:1.5px solid #9aa3b0;border-radius:2px;flex-shrink:0;}
+    .form-box.green-box{border-color:#0a7c4a;}.form-box.orange-box{border-color:#c05c00;}.form-box.red-box{border-color:#d0222e;}
+    .form-box-line{flex:1;height:22px;border:none;border-bottom:1px solid #c9d0db;}
+    .form-vitaux-grid{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-vitaux-row{display:grid;grid-template-columns:60px 1fr 1fr 70px 60px 70px 60px;}
+    .form-vitaux-header{background:#f7f8fa;}
+    .form-vitaux-header span{font-family:monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-vitaux-row .form-box-line{border-radius:0;border-bottom:1px solid #e4e8ee;border-right:1px solid #e4e8ee;padding:0 3px;}
+    .form-soins-table{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-soins-row{display:flex;}.form-soins-header{background:#f7f8fa;}
+    .form-soins-header span{flex:1;font-family:monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-soins-row .form-box-line{border-radius:0;border-bottom:1px solid #e4e8ee;border-right:1px solid #e4e8ee;padding:0 3px;}
+    .form-prescriptions-table{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-presc-header{display:flex;background:#f7f8fa;}
+    .form-presc-header span{flex:1;font-family:monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-presc-row{display:flex;border-top:1px solid #e4e8ee;min-height:26px;align-items:center;}
+    .form-presc-row .form-box-line{border-radius:0;border-right:1px solid #e4e8ee;height:26px;padding:0 3px;}
+    .form-alertes-grid{display:flex;flex-direction:column;border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.6rem;}
+    .form-alerte-row{display:flex;align-items:center;gap:0.6rem;padding:0.4rem 0.6rem;border-bottom:1px solid #e4e8ee;font-size:0.75rem;}
+    .form-alerte-row:last-child{border-bottom:none;}
+    .form-cb-col{flex-shrink:0;}.form-alerte-label{flex:2;font-size:0.75rem;color:#2d3340;}
+    .form-alerte-heure,.form-alerte-nom{display:flex;align-items:center;gap:3px;font-size:0.7rem;color:#6b7585;}
+    .form-alerte-nom{flex:1;}
+    .form-chrono-table{border:1px solid #e4e8ee;border-radius:4px;overflow:hidden;margin-bottom:0.5rem;}
+    .form-chrono-header{display:flex;background:#f7f8fa;}
+    .form-chrono-header span{flex:1;font-family:monospace;font-size:0.55rem;text-transform:uppercase;color:#9aa3b0;padding:0.3rem 0.4rem;border-right:1px solid #e4e8ee;}
+    .form-chrono-row{display:flex;border-top:1px solid #e4e8ee;align-items:center;}
+    .form-chrono-row .form-box-line{border-radius:0;border-right:1px solid #e4e8ee;height:24px;}
+    .form-footer-row{display:flex;gap:0.85rem;align-items:flex-end;margin-top:1rem;padding-top:0.85rem;border-top:1px solid #e4e8ee;}
+    .form-field-small{flex:1;display:flex;flex-direction:column;gap:3px;}
+    .form-field-small label{font-size:0.62rem;color:#6b7585;font-family:monospace;text-transform:uppercase;letter-spacing:0.05em;}
+    .form-sig-box{height:40px;border:1.5px solid #111520;border-radius:3px;}
+    .form-print-note{margin-top:0.75rem;font-family:monospace;font-size:0.55rem;color:#c9d0db;text-align:center;border-top:1px solid #e4e8ee;padding-top:0.4rem;}
+  `;
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${filename}</title><style>${styles}</style></head><body>${sheet.outerHTML}</body></html>`;
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename + '.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ─── TÉLÉCHARGEMENT PDF FORMATION ─── */
+const pdfContents = {
+  'phishing': {
+    title: 'Guide anti-phishing hospitalier',
+    subtitle: 'CyberCare — Niveau 1 · Bases',
+    ref: 'CC-F01',
+    color: '#1a4fa0',
+    sections: [
+      { title: '🎯 Objectif', content: 'Permettre à tout membre du personnel hospitalier d\'identifier un email de phishing et d\'adopter les bons réflexes pour protéger le système d\'information de l\'établissement.' },
+      { title: '🔍 Les 5 signaux d\'alerte', content: '1. Expéditeur inconnu ou adresse email suspecte (ex : nhs-hopital@gmail.com)\n2. Objet urgent ou alarmant : "Votre compte va être désactivé"\n3. Lien qui ne correspond pas au site officiel\n4. Pièce jointe non attendue (.exe, .zip, .doc avec macros)\n5. Demande d\'identifiants ou d\'informations confidentielles' },
+      { title: '✅ Les bons réflexes', content: '• NE JAMAIS cliquer sur un lien sans vérifier l\'URL complète\n• NE JAMAIS ouvrir une pièce jointe d\'un expéditeur inconnu\n• Signaler immédiatement au DSI par téléphone\n• Ne pas transférer l\'email\n• Conserver l\'email comme preuve (ne pas supprimer)' },
+      { title: '📞 Contacts d\'urgence', content: 'DSI / Responsable informatique : ________________\nCERT Santé : 0 800 *** ***\nANSSI : 3218\n\nEn cas de doute : STOP et appelez votre DSI.' },
+      { title: '⚖️ Cadre réglementaire', content: 'Programme CaRE (Cybersécurité Accélération et Résilience des Établissements)\nPGSSI-S — Politique Générale de Sécurité des Systèmes d\'Information de Santé\nRGPD — Obligation de signalement en cas de violation de données patients' },
+    ]
+  },
+  'ransomware': {
+    title: 'Procédure réponse ransomware',
+    subtitle: 'CyberCare — Niveau 2 · Réaction',
+    ref: 'CC-F02',
+    color: '#c05c00',
+    sections: [
+      { title: '🚨 Définition', content: 'Un ransomware (rançongiciel) est un logiciel malveillant qui chiffre vos fichiers et exige une rançon. Dans un contexte hospitalier, il peut paralyser les systèmes critiques et mettre des vies en danger.' },
+      { title: '⏱ Les 5 actions dans les 10 premières minutes', content: '1. STOP — Notez l\'heure exacte de détection\n2. Appelez immédiatement le DSI par téléphone (NE PAS utiliser email)\n3. Débranchez le câble réseau du poste infecté (NE PAS éteindre)\n4. Activez le kit papier de secours (mode dégradé)\n5. Documentez toutes vos actions sur papier' },
+      { title: '🔴 Actions DSI — Niveau ROUGE', content: '• Couper tous les accès réseau sur instruction du DSI\n• Isoler les systèmes infectés du réseau\n• Préserver les logs sur support externe isolé\n• Appeler l\'ANSSI au 3218\n• Notifier le CERT Santé\n• Évaluer si notification CNIL requise (données patients compromises → 72h max)' },
+      { title: '🏥 Continuité des soins', content: '• Récupérer les fiches papier pré-imprimées dans l\'armoire du service\n• Prioriser les patients en urgence vitale\n• Maintenir les soins sans système informatique\n• Documenter manuellement toutes les actions médicales' },
+      { title: '❌ NE PAS faire', content: '• NE PAS payer la rançon\n• NE PAS éteindre les machines infectées (perte de preuves)\n• NE PAS utiliser les systèmes compromis\n• NE PAS ignorer une alerte même mineure' },
+    ]
+  },
+  'kit-papier': {
+    title: 'Guide utilisation kit papier de secours',
+    subtitle: 'CyberCare — Niveau 3 · Continuité des soins',
+    ref: 'CC-F03',
+    color: '#0a7c4a',
+    sections: [
+      { title: '📋 Principe du kit papier', content: 'En cas de cyberattaque de niveau ROUGE, tous les systèmes informatiques peuvent être indisponibles. Le kit papier permet de maintenir la continuité des soins sans aucun outil numérique. Il doit être imprimé à l\'avance et stocké dans chaque service.' },
+      { title: '📁 Composition du kit (4 fiches)', content: '1. FP-01 — Fiche Patient : identification et informations médicales essentielles\n2. FSI-02 — Fiche Soins Infirmiers : suivi des signes vitaux et transmissions\n3. FPM-03 — Fiche Prescription Médicale : ordonnances de secours\n4. RIC-04 — Registre Incident Cyber : déclaration et chronologie officielle' },
+      { title: '✏️ Règles de remplissage', content: '• Remplir AU STYLO NOIR uniquement\n• Écrire lisiblement en MAJUSCULES\n• Principe de minimisation RGPD : 10 champs maximum par fiche\n• Une fiche par patient\n• Conserver la fiche avec le patient à tout moment\n• Dater et signer chaque fiche' },
+      { title: '🗄️ Gestion et stockage', content: '• Imprimer minimum 20 exemplaires de chaque fiche par service\n• Ranger dans l\'armoire dédiée du service (signalée "SECOURS CYBER")\n• Vérifier le stock chaque semaine\n• Recycler les fiches vierges de plus de 6 mois\n• Ne jamais numériser les fiches papier remplies sans l\'accord du DPO' },
+      { title: '🔄 Retour à la normale', content: '• À la fin de l\'incident, remettre les fiches papier au DSI ou au médecin référent\n• Les données doivent être saisies dans le système informatique une fois rétabli\n• Conserver les fiches originales 5 ans (obligation légale)\n• Signaler toute perte ou destruction de fiche au DPO' },
+    ]
+  },
+  'mots-de-passe': {
+    title: 'Politique mots de passe sécurisés',
+    subtitle: 'CyberCare — Niveau 1 · Hygiène numérique',
+    ref: 'CC-F04',
+    color: '#6b21a8',
+    sections: [
+      { title: '🔑 Règles essentielles', content: '• Minimum 12 caractères\n• Mélanger majuscules, minuscules, chiffres et caractères spéciaux\n• Ne jamais utiliser : prénom, date de naissance, "motdepasse", "1234"\n• Un mot de passe différent par compte\n• Changer tous les 3 mois ou immédiatement en cas de doute' },
+      { title: '💡 Méthode mnémotechnique', content: 'Utilisez une phrase de passe :\n"J\'aime travailler à l\'hôpital le lundi !" → JtA@H!lL2024\n\nCette technique donne un mot de passe fort et mémorisable sans gestionnaire complexe.' },
+      { title: '⚠️ Ce qu\'il ne faut JAMAIS faire', content: '• Partager son mot de passe (même au DSI)\n• L\'écrire sur un post-it collé à l\'écran\n• L\'envoyer par email ou SMS\n• Utiliser le même mot de passe pour le perso et le pro\n• Se connecter sur un ordinateur public sans se déconnecter' },
+      { title: '🔒 Verrouillage des sessions', content: '• Verrouiller votre session dès que vous quittez votre poste (Win+L)\n• Activer le verrouillage automatique après 5 minutes d\'inactivité\n• Ne jamais laisser votre session ouverte dans une salle commune\n• Signaler tout accès non autorisé à votre compte' },
+    ]
+  },
+  'reglementation': {
+    title: 'Synthèse programme CaRE / PGSSI-S',
+    subtitle: 'CyberCare — Réglementation & Conformité',
+    ref: 'CC-F05',
+    color: '#111520',
+    sections: [
+      { title: '🏛️ Programme CaRE', content: 'Le programme Cybersécurité Accélération et Résilience des Établissements (CaRE) vise à améliorer le niveau de sécurité des systèmes d\'information des établissements de santé français. Il est piloté par la DGOS et l\'ANS.' },
+      { title: '📜 PGSSI-S', content: 'La Politique Générale de Sécurité des Systèmes d\'Information de Santé fixe le cadre de référence pour la SSI dans le secteur santé-social. Elle couvre : gestion des identités, contrôle d\'accès, sécurité des dispositifs médicaux, protection des données patients.' },
+      { title: '⚖️ RGPD & Santé', content: '• Les données de santé sont des données sensibles (Art. 9 RGPD)\n• Toute violation doit être notifiée à la CNIL dans les 72h (Art. 33)\n• Les personnes concernées doivent être informées si risque élevé (Art. 34)\n• Sanctions : jusqu\'à 4% du chiffre d\'affaires mondial' },
+      { title: '📞 Contacts réglementaires', content: 'ANSSI : 3218 (signalement incident)\nCERT Santé : cert-sante.fr\nCNIL : cnil.fr (notification violation)\nANS : esante.gouv.fr\n\nDélais légaux :\n• Signalement ANSSI : sans délai\n• Notification CNIL : 72 heures maximum\n• Information des patients : sans délai injustifié' },
+      { title: '✅ Checklist conformité établissement', content: '☐ Référent sécurité (RSSI) désigné\n☐ PCA/PRI documenté et testé\n☐ Formation annuelle du personnel\n☐ Sauvegardes testées régulièrement\n☐ Audit SSI annuel réalisé\n☐ Fiches papier de secours disponibles\n☐ Contrats fournisseurs avec clauses SSI' },
+    ]
+  },
+  'kit-vert': {
+    title: 'Kit Prévention — Niveau Vert',
+    subtitle: 'CyberCare — Situation normale · Procédures préventives',
+    ref: 'KV-01',
+    color: '#0a7c4a',
+    sections: [
+      { title: '🎯 Objectif', content: 'Ce kit s\'applique en situation normale (niveau VERT). Il recense les actions préventives à réaliser régulièrement pour maintenir un niveau de sécurité optimal et éviter une cyberattaque.' },
+      { title: '1 — Vérifier les mots de passe et accès', content: 'S\'assurer que tous les comptes utilisent des mots de passe complexes d\'au moins 12 caractères (majuscules, chiffres, caractères spéciaux). Activer l\'authentification à double facteur si disponible. Changer les mots de passe partagés immédiatement.\n\nFréquence : mensuelle ou à chaque départ/arrivée d\'un membre du personnel.' },
+      { title: '2 — Sensibiliser aux emails suspects', content: 'Rappeler aux équipes de ne jamais cliquer sur un lien ou ouvrir une pièce jointe d\'un expéditeur inconnu. Vérifier l\'adresse email complète de l\'expéditeur. Signaler tout email douteux au DSI avant toute action.\n\nAction concrète : organiser un rappel en réunion de service une fois par mois.' },
+      { title: '3 — Vérifier les mises à jour système', content: 'S\'assurer que les systèmes d\'exploitation et logiciels médicaux sont à jour. Contacter le DSI si des mises à jour critiques sont en attente depuis plus de 7 jours. Les patches de sécurité sont prioritaires.\n\nFréquence : vérification hebdomadaire par le DSI.' },
+      { title: '4 — Vérifier les sauvegardes critiques', content: 'Confirmer que les sauvegardes automatiques fonctionnent et que les dernières sauvegardes sont récentes (moins de 24h). Tester la restauration si possible. Garder une copie hors ligne sur support physique isolé.\n\nFréquence : test de restauration mensuel obligatoire.' },
+      { title: '📞 Contact DSI', content: 'Responsable informatique (DSI) : ________________________\nTéléphone direct : ________________________\nAstreinte week-end/nuit : ________________________\n\nEn cas de doute, contactez votre DSI avant toute action.' },
+    ]
+  },
+  'kit-orange': {
+    title: 'Kit Réaction Rapide — Niveau Orange',
+    subtitle: 'CyberCare — Incident détecté · Procédures immédiates',
+    ref: 'KO-02',
+    color: '#c05c00',
+    sections: [
+      { title: '🚨 Déclenchement', content: 'Ce kit s\'applique dès qu\'un incident de sécurité est détecté : comportement anormal d\'un poste, message suspect, connexion non autorisée, fichiers inaccessibles. Ne pas attendre de certitude — agir dès le premier doute.' },
+      { title: '1 — STOP — Préserver les preuves', content: 'Ne pas éteindre les machines, ne pas supprimer de fichiers, ne pas tenter de réparer seul. Garder les preuves intactes. Noter l\'heure exacte de détection et ce que vous avez observé (message, comportement anormal, etc.).\n\nSur papier, notez : heure, poste concerné, ce qui s\'est passé, votre nom.' },
+      { title: '2 — Alerter le DSI par téléphone', content: 'Appeler immédiatement le responsable informatique. Ne pas envoyer d\'email (le réseau peut être compromis). Décrire précisément : quel poste, quel symptôme, à quelle heure. Rester disponible pour ses instructions.\n\nNuméro DSI : ________________________' },
+      { title: '3 — Isoler le poste suspect', content: 'Sur instruction du DSI uniquement : débrancher le câble réseau du poste concerné. Ne pas l\'éteindre (la mémoire RAM peut contenir des preuves utiles). Signaler les autres postes potentiellement affectés.\n\nIMPORTANT : Attendre l\'instruction du DSI avant d\'agir.' },
+      { title: '4 — Activer la cellule de crise', content: 'Prévenir la direction. Réunir le DSI, le responsable médical et administratif. Commencer à documenter toutes les actions sur papier. Évaluer si le passage en niveau ROUGE est nécessaire.\n\nCritères passage ROUGE : systèmes critiques indisponibles, propagation confirmée, services de soins impactés.' },
+      { title: '📞 Contacts d\'urgence', content: 'DSI : ________________________\nDirection : ________________________\nCERT Santé : 0 800 *** ***\nANSSI : 3218\n\nDélai légal : signalement ANSSI sans délai dès confirmation.' },
+    ]
+  },
+  'kit-rouge': {
+    title: 'Kit Crise Totale — Niveau Rouge',
+    subtitle: 'CyberCare — Systèmes indisponibles · Continuité des soins',
+    ref: 'KR-03',
+    color: '#d0222e',
+    sections: [
+      { title: '🔴 Déclenchement niveau ROUGE', content: 'Ce kit s\'applique quand les systèmes informatiques critiques sont indisponibles. La priorité absolue est la continuité des soins. La vie des patients prime sur tout objectif informatique.' },
+      { title: '1 — Activer les fiches papier IMMÉDIATEMENT', content: 'Récupérer les fiches papier pré-imprimées dans l\'armoire "SECOURS CYBER" de chaque service. Les distribuer au personnel soignant en priorité absolue.\n\nFiches disponibles :\n• FP-01 Fiche Patient\n• FSI-02 Fiche Soins Infirmiers\n• FPM-03 Fiche Prescription Médicale\n• RIC-04 Registre Incident Cyber' },
+      { title: '2 — Isoler complètement le réseau', content: 'Sur instruction du DSI : couper tous les accès réseau. Débrancher les équipements non essentiels. Les appareils médicaux critiques (moniteurs, respirateurs, pompes) restent fonctionnels — ne JAMAIS les débrancher.\n\nVérifier avec le médecin chef avant toute coupure d\'équipement médical.' },
+      { title: '3 — Alerter l\'ANSSI et les autorités', content: 'Appeler l\'ANSSI au 3218, le CERT Santé et l\'ARS. Signaler l\'attaque à la CNIL si des données patients sont potentiellement compromises (délai légal : 72h maximum).\n\nConserver tous les logs sur support externe isolé du réseau.' },
+      { title: '4 — Maintenir les soins critiques', content: 'Prioriser les patients en urgence vitale. Utiliser les fiches patients papier pour toute prescription et transmission entre équipes. Organiser des relèves orales fréquentes.\n\nLa vie des patients est la priorité absolue — aucun soin critique ne doit être interrompu.' },
+      { title: '📋 Checklist responsable de service', content: '☐ Fiches papier distribuées dans le service\n☐ DSI et direction prévenus\n☐ ANSSI contactée (3218)\n☐ CNIL notifiée si données compromises\n☐ Logs préservés sur support isolé\n☐ Chronologie documentée sur papier\n☐ Personnel informé du mode dégradé\n☐ Soins critiques maintenus et documentés' },
+    ]
+  },
+  'pack-complet': {
+    title: 'Kit de sensibilisation complet CyberCare',
+    subtitle: 'Tous modules — Formation complète du personnel hospitalier',
+    ref: 'CC-PACK',
+    color: '#d0222e',
+    sections: [
+      { title: '📦 Contenu du pack', content: 'Ce pack regroupe l\'ensemble des ressources de formation CyberCare :\n• CC-F01 : Guide anti-phishing\n• CC-F02 : Procédure ransomware\n• CC-F03 : Kit papier de secours\n• CC-F04 : Mots de passe\n• CC-F05 : Réglementation CaRE/PGSSI-S' },
+      { title: '🎯 Objectif pédagogique', content: 'À l\'issue de cette formation, chaque membre du personnel sera capable de :\n1. Identifier une tentative de phishing\n2. Réagir correctement en cas de ransomware\n3. Utiliser les fiches papier de secours\n4. Appliquer les règles d\'hygiène numérique\n5. Connaître ses obligations réglementaires' },
+      { title: '📅 Programme de formation recommandé', content: 'Session 1 (30 min) : Phishing et mots de passe\nSession 2 (30 min) : Ransomware et réponse à incident\nSession 3 (30 min) : Kit papier et mode dégradé\nSession 4 (20 min) : Réglementation et conformité\nEvaluation (15 min) : Simulateur CyberCare\n\nFréquence recommandée : annuelle + rappel lors de tout incident' },
+      { title: '📊 Niveaux de formation', content: 'NIVEAU 1 — Hygiène numérique (tout le personnel)\nNIVEAU 2 — Réaction à incident (infirmiers, médecins, IT)\nNIVEAU 3 — Continuité des soins (médecins, infirmiers)\nNIVEAU 4 — Gestion de crise (direction, DSI, RSSI)' },
+    ]
+  }
+};
+
+function downloadPDF(type) {
+  const data = pdfContents[type];
+  if (!data) return;
+  const now = new Date().toLocaleDateString('fr-FR');
+  let sectionsHTML = data.sections.map(s => `
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:monospace;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aa3b0;border-bottom:1px solid #e4e8ee;padding-bottom:0.3rem;margin-bottom:0.75rem;">${s.title}</div>
+      <div style="font-size:0.85rem;line-height:1.75;color:#2d3340;white-space:pre-line;">${s.content}</div>
+    </div>
+  `).join('');
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${data.title} — CyberCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;background:white;padding:2cm;max-width:21cm;margin:0 auto;}
+    @media print{body{padding:1.5cm;} @page{margin:0;}}
+    .doc-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1.25rem;border-bottom:3px solid ${data.color};margin-bottom:1.5rem;}
+    .doc-logo{width:44px;height:44px;background:${data.color};color:white;display:grid;place-items:center;font-size:1.6rem;font-weight:700;border-radius:6px;flex-shrink:0;margin-right:14px;}
+    .doc-brand{font-family:monospace;font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#6b7585;}
+    .doc-title{font-family:'Instrument Serif',serif;font-size:1.5rem;color:#111520;margin-top:4px;line-height:1.2;}
+    .doc-sub{font-family:monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.07em;color:${data.color};margin-top:6px;}
+    .doc-meta{text-align:right;font-family:monospace;font-size:0.6rem;color:#9aa3b0;}
+    .doc-meta strong{display:block;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+    .alert-bar{background:${data.color};color:white;padding:0.45rem 1rem;font-family:monospace;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;text-align:center;margin-bottom:1.5rem;border-radius:4px;}
+    .footer{margin-top:2rem;padding-top:0.75rem;border-top:1px solid #e4e8ee;font-family:monospace;font-size:0.52rem;color:#c9d0db;text-align:center;}
+    button{display:none!important;}
+  </style>
+  </head><body>
+  <div class="doc-header">
+    <div style="display:flex;align-items:center;">
+      <div class="doc-logo">+</div>
+      <div>
+        <div class="doc-brand">CyberCare / SecuriMed</div>
+        <div class="doc-title">${data.title}</div>
+        <div class="doc-sub">${data.subtitle}</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>Réf. document</strong>${data.ref}<br><br>
+      <strong>Date d'impression</strong>${now}<br><br>
+      <strong>Version</strong>1.0
+    </div>
+  </div>
+  <div class="alert-bar">Document de formation — CyberCare — Usage interne établissement de santé — Efrei Paris 2025/2026</div>
+  ${sectionsHTML}
+  <div class="footer">CyberCare / SecuriMed — ${data.ref} — Efrei Paris, Projets Transverses 2025/2026 — GUETARNI L. · AMRANI A. · RECHIDI I. · OUAYACH-YAHIAT A. — Document à usage interne</div>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`;
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, '_blank');
+  if (!win) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'CyberCare_' + type + '.html';
+    a.click();
+  }
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+}
+
 // Init
 loadScenario(0, document.querySelector('.sim-scenario-btn'));
 
 /* ═══════════════════════════════════════
-   PWA — Service Worker & Install Prompt
-   ═══════════════════════════════════════ */
 
 /* Enregistrement du Service Worker */
 if ('serviceWorker' in navigator) {
@@ -3010,7 +3475,7 @@ function showUpdateBanner() {
       background:var(--red); color:white; border:none; padding:0.35rem 0.75rem;
       border-radius:4px; font-family:var(--font-mono); font-size:0.7rem;
       font-weight:700; text-transform:uppercase; letter-spacing:0.04em; cursor:pointer;
-    ">Mettre a jour</button>
+    ">Mettre à jour</button>
   `;
   document.body.appendChild(banner);
   setTimeout(() => banner.remove(), 8000);
